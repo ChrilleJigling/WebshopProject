@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<head> 
+    <title>Adding numbers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+    <form action="#" th:action="@{/webadder}" th:object="${ulfIntegerPair}" method="post">
+    	<p>Numbers to add: 
+    		<input type="text" th:field="*{first}" />
+        <input type="text" th:field="*{second}" />
+        <input type="submit" value="Add" /> <input type="reset" value="Reset" />
+    </form>
+</body>
+</html>

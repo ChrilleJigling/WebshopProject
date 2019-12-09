@@ -2,12 +2,10 @@ package webshop;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,7 +15,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer product_id;
 
     private String name;
     private double price;
@@ -52,15 +50,15 @@ public class Product implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return product_id;
     }  
 
     public Product(Integer id) {
-        this.id = id;
+        this.product_id = id;
     }
 
     public Product(Integer id, String name, double price) {
-        this.id = id;
+        this.product_id = id;
         this.name = name;
         this.price = price;
     }
