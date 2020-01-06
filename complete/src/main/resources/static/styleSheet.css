@@ -1,4 +1,4 @@
-.headerSkit {
+.headerText {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -9,4 +9,15 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   text-shadow: 5px 4px 0 rgba(0,0,0,0.5) ;
+}
+
+.headerDiv {
+    height: 100px;
+    width: 100%;
+}
+
+.centerText {
+    width:100%;
+    text-align:center;
+    margin-top: 5%;
 }

@@ -3,9 +3,13 @@
 <head> 
     <title>ArCh Webshop</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel = "stylesheet" type = "text/css" href = "styleSheet.css" />
 </head>
 <body>
-    <header>ArCh Webshop<header/>
+    
+    <div class="headerText">ArCh Webshop</div>
+    <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
+    <div class="centerText">
 	<h1>Login</h1>
 	<span th:text="${message}">text</span>
         
@@ -14,6 +18,6 @@
          <p>Password: <input type="text" th:field="*{password}" /></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
-        
+    </div>    
 </body>
 </html>
