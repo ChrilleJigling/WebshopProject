@@ -16,12 +16,13 @@ public class WebshopService {
     Account account;
     
     public boolean login(String accountName, String password) {
+        isLoggedIn = false;
         List<Account> a = accountRepository.findByUsername(accountName);
         if (a.size() > 0) {
             account = a.get(0);
             if (password.equals(account.getPassword())) {
                 isLoggedIn = true;
-            } 
+            }
         } 
         return isLoggedIn;
     }
