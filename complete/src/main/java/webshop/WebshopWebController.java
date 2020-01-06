@@ -30,6 +30,11 @@ public class WebshopWebController {
         model.addAttribute("accountName", "chrille");
         return "accountPage";
     }
+    
+    @GetMapping("/register")
+    public String register(Model model, LoginFormBean loginFormBean) {
+        return "register";
+    }
 
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {
