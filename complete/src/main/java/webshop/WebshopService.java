@@ -12,8 +12,8 @@ public class WebshopService {
     @Autowired
     AccountRepository accountRepository;
 
-    boolean isLoggedIn;
-    Account account;
+    static boolean isLoggedIn;
+    static Account account;
 
     public boolean login(String accountName, String password) {
         isLoggedIn = false;

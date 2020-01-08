@@ -27,7 +27,7 @@ public class WebshopWebController {
 
     @GetMapping("/accountPage")
     public String accountInformation(Model model) {
-        model.addAttribute("message", webshopService.isLoggedIn);
+        model.addAttribute("message", webshopService.account.getUsername());
         return "accountPage";
     }
 
