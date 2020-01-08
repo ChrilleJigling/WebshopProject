@@ -26,8 +26,8 @@ public class WebshopWebController {
     }
 
     @GetMapping("/accountPage")
-    public String accountInformation(Model model, LoginFormBean loginFormBean) {
-        model.addAttribute("accountName", "chrille");
+    public String accountInformation(Model model) {
+        model.addAttribute("message", "chrille");
         return "accountPage";
     }
 
