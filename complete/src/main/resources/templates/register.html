@@ -15,8 +15,8 @@
         
     <form action="#" th:action="@{/register}" th:object="${loginFormBean}" method="post">
         <p>Username: <input type="text" th:field="*{username}" /></p>
-         <p>Password: <input type="text" th:field="*{password}" /></p>
-        <p><input type="submit" value="Create Account" /> <input type="reset" value="Clear" /></p>
+         <p>Password : <input type="text" th:field="*{password}" /></p>
+        <p><input class="button" type="submit" value="Create Account" /> <input class="button" type="reset" value="Clear" /> <a class="button2" href="login">Back</a></p>
     </form>
     </div>    
 </body>
