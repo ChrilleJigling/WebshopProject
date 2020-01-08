@@ -27,7 +27,7 @@ public class WebshopWebController {
 
     @GetMapping("/accountPage")
     public String accountInformation(Model model) {
-        model.addAttribute("message", "chrille");
+        model.addAttribute("message", webshopService.isLoggedIn);
         return "accountPage";
     }
 
@@ -41,7 +41,7 @@ public class WebshopWebController {
         if (webshopService.login(loginFormBean.username, loginFormBean.password)) {
             model.addAttribute("username", loginFormBean.getUsername());
             model.addAttribute("password", loginFormBean.getPassword());
-            return "accountPage";
+            return "redirect:/accountPage";
         } else {
             model.addAttribute("message", "No such user, try again");
             return "login";
