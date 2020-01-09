@@ -35,6 +35,11 @@ public class WebshopWebController {
     public String register(Model model, LoginFormBean loginFormBean) {
         return "register";
     }
+    
+    @GetMapping("/pcs")
+    public String linkToPC(Model model, LoginFormBean loginFormBean) {
+        return "pcs";
+    }
 
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {

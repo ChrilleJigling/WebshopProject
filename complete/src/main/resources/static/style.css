@@ -22,8 +22,14 @@
     margin-top: 5%;
 }
 
+
+.flex {
+    display: flex;
+    align-content: center;
+    
+}
+
 .button {
-    height: 33px;
     padding: 7px 10px;
     background: #0096ff;
     color: #FFF;
