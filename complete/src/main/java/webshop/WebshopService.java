@@ -11,11 +11,13 @@ public class WebshopService {
 
     @Autowired
     AccountRepository accountRepository;
-@Autowired
+    
+    @Autowired
     ProductRepository productRepository;
+    
     static boolean isLoggedIn;
     static Account account;
-
+    
     public boolean login(String accountName, String password) {
         isLoggedIn = false;
         List<Account> a = accountRepository.findByUsername(accountName);
@@ -53,4 +55,8 @@ public class WebshopService {
         Account account = new Account(username, password);
         accountRepository.save(account);
     }
+    
+   /* public List getProductList(String category) {
+        return productRepository.findByCategory(category);
+    }*/
 }
