@@ -11,7 +11,8 @@ public class WebshopService {
 
     @Autowired
     AccountRepository accountRepository;
-
+@Autowired
+    ProductRepository productRepository;
     static boolean isLoggedIn;
     static Account account;
 
@@ -25,6 +26,10 @@ public class WebshopService {
             }
         }
         return isLoggedIn;
+    }
+
+    public List makeSearch(String keyword) {
+    return productRepository.findByNameLike(keyword);
     }
 
     public boolean isUsernameAvailable(String username) {
@@ -43,6 +48,7 @@ public class WebshopService {
             return false;
         }
     }
+
     public void registerAccount(String username, String password) {
         Account account = new Account(username, password);
         accountRepository.save(account);

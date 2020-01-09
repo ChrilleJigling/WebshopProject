@@ -31,6 +31,15 @@ public class WebshopWebController {
         return "accountPage";
     }
 
+    @PostMapping("/accountPage")
+    public String search(@ModelAttribute String search, Model model) {
+        if (search.length() > 0) {
+            List d = webshopService.makeSearch(search);
+            model.addAttribute("message", d);
+        }
+        return "/accountPage";
+    }
+
     @GetMapping("/register")
     public String register(Model model, LoginFormBean loginFormBean) {
         return "register";
@@ -39,8 +48,6 @@ public class WebshopWebController {
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {
         if (webshopService.login(loginFormBean.username, loginFormBean.password)) {
-            model.addAttribute("username", loginFormBean.getUsername());
-            model.addAttribute("password", loginFormBean.getPassword());
             return "redirect:/accountPage";
         } else {
             model.addAttribute("message", "No such user, try again");
