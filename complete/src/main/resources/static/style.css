@@ -22,11 +22,15 @@
     margin-top: 5%;
 }
 
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.flex {
-    display: flex;
-    align-content: center;
-    
+.box div {
+  width: 100px;
+  height: 100px;
 }
 
 .button {
