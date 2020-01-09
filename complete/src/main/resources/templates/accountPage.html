@@ -18,6 +18,12 @@ and open the template in the editor.
             <h3>Account Details:</h3>
             <span th:text="${message}">text</span>   
         </div>
+        
+        <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
+        <input type="text" th:field="*{keyword}" />
+         <div><input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> </div>
+    </form>
+        
         <div class="flex">
             <a class="button" href="pcs">PC</a>
             <a class="button" href="laptops">Laptop</a>

@@ -27,15 +27,15 @@ public class WebshopWebController {
 
     @GetMapping("/accountPage")
     public String accountInformation(Model model) {
+        model.addAttribute("searchFormBean", new SearchFormBean());
         model.addAttribute("message", webshopService.account.getUsername());
         return "accountPage";
     }
 
     @PostMapping("/accountPage")
-    public String search(@ModelAttribute String search, Model model) {
-        if (search.length() > 0) {
-            List d = webshopService.makeSearch(search);
-            model.addAttribute("message", d);
+    public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
+        if (searchFormBean.keyword.length() > 0) {
+            List d = webshopService.makeSearch(searchFormBean.getKeyword());
         }
         return "/accountPage";
     }
