@@ -49,7 +49,8 @@ public class WebshopWebController {
     @PostMapping("/accountPage")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
         if (searchFormBean.keyword.length() > 0) {
-            List d = webshopService.makeSearch(searchFormBean.getKeyword());
+            String searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
+            model.addAttribute("message", searchResult);
         }
         return "/accountPage";
     }
@@ -96,7 +97,7 @@ public class WebshopWebController {
     
     @GetMapping("/monitor")
     public String linkToMonitor(Model model) {
-        return "pcs";
+        return "monitor";
     }
     
     // ----- HEADSET ----- //

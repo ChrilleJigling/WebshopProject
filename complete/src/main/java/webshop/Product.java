@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product implements Serializable {
 
     @Id
@@ -19,20 +19,46 @@ public class Product implements Serializable {
 
     private String name;
     private double price;
-    
-    @OneToMany(mappedBy="productId")
+    private String category;
+
+    @OneToMany(mappedBy = "productId")
     private List<OrderLine> orderLinesList;
 
     public Product() {
         super();
     }
 
-    public Product( String name, double price) {
+    public Product(String name, double price, String category) {
         super();
         this.name = name;
         this.price = price;
+        this.category = category;
     }
-    
+
+    public Integer getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<OrderLine> getOrderLinesList() {
+        return orderLinesList;
+    }
+
+    public void setOrderLinesList(List<OrderLine> orderLinesList) {
+        this.orderLinesList = orderLinesList;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,7 +77,7 @@ public class Product implements Serializable {
 
     public int getId() {
         return product_id;
-    }  
+    }
 
     public Product(Integer id) {
         this.product_id = id;
@@ -70,4 +96,10 @@ public class Product implements Serializable {
     public void setOrderlinesList(List<OrderLine> orderlinesList) {
         this.orderLinesList = orderlinesList;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + price + ":-\n\r";
+    }
+
 }
