@@ -1,6 +1,8 @@
 package webshop;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -9,12 +11,13 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class WebshopService {
 
+    Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Autowired
     ProductRepository productRepository;
-    
+
     static boolean isLoggedIn;
     static Account account;
     
@@ -30,8 +33,14 @@ public class WebshopService {
         return isLoggedIn;
     }
 
-    public List makeSearch(String keyword) {
-    return productRepository.findByNameLike(keyword);
+    public String makeSearch(String keyword) {
+        String searchResult = "";
+        List<Product> searchList = productRepository.findByNameIgnoreCaseContaining(keyword);
+        for (Product product : searchList) {
+            searchResult += product.toString() + "\n";
+        }
+        logger.info(searchResult);
+        return searchResult;
     }
 
     public boolean isUsernameAvailable(String username) {
@@ -56,7 +65,7 @@ public class WebshopService {
         accountRepository.save(account);
     }
     
-    public List getProductList(String category) {
+     public List getProductList(String category) {
         return productRepository.findByCategory(category);
     }
 }
