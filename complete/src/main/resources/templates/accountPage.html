@@ -16,7 +16,7 @@ and open the template in the editor.
     <body>
         <div class="centerText">
             <h3>Account Details:</h3>
-            <span th:text="${message}">text</span>   
+            <pre th:text="${message}">text</pre>   
         </div>
         
         <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
@@ -33,5 +33,6 @@ and open the template in the editor.
             <a class="button" href="mouse">Mouse</a>
 
         </div>
+        <pre th:text="${searchResult}">text</pre>  
     </body>
 </html>

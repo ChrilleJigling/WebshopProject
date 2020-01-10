@@ -10,13 +10,14 @@ import org.springframework.web.context.annotation.SessionScope;
 @Service
 @SessionScope
 public class WebshopService {
-Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
+
+    Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Autowired
     ProductRepository productRepository;
-    
+
     static boolean isLoggedIn;
     static Account account;
     
@@ -33,12 +34,13 @@ Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
     }
 
     public String makeSearch(String keyword) {
-        String searchResult="";
+        String searchResult = "";
         List<Product> searchList = productRepository.findByNameIgnoreCaseContaining(keyword);
         for (Product product : searchList) {
-            searchResult += product.toString()+System.lineSeparator();
+            searchResult += product.toString() + "\n";
         }
-    return searchResult;
+        logger.info(searchResult);
+        return searchResult;
     }
 
     public boolean isUsernameAvailable(String username) {
@@ -62,8 +64,8 @@ Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
         Account account = new Account(username, password);
         accountRepository.save(account);
     }
-    
-   /* public List getProductList(String category) {
+
+    /* public List getProductList(String category) {
         return productRepository.findByCategory(category);
     }*/
 }

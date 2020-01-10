@@ -99,7 +99,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return name + " " + price + ":-\n\r";
+        return name + " " + price + ":-\n";
     }
 
 }
