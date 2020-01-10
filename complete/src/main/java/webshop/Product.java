@@ -19,6 +19,7 @@ public class Product implements Serializable {
 
     private String name;
     private double price;
+    private String category;
     
     @OneToMany(mappedBy="productId")
     private List<OrderLine> orderLinesList;
@@ -27,10 +28,11 @@ public class Product implements Serializable {
         super();
     }
 
-    public Product( String name, double price) {
+    public Product( String name, double price, String category) {
         super();
         this.name = name;
         this.price = price;
+        this.category = category;
     }
     
     public String getName() {
@@ -41,6 +43,14 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
     public double getPrice() {
         return price;
     }

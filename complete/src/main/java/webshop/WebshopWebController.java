@@ -1,6 +1,7 @@
 package webshop;
 
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WebshopWebController {
@@ -82,6 +86,7 @@ public class WebshopWebController {
     
     @GetMapping("/pc")
     public String linkToPC(Model model) {
+        model.addAttribute("products", webshopService.getProductList("PC"));
         return "pc";
     }
     
@@ -89,6 +94,7 @@ public class WebshopWebController {
     
     @GetMapping("/laptop")
     public String linkToLaptop(Model model) {
+        model.addAttribute("products", webshopService.getProductList("Laptop"));
         return "laptop";
     }
     
@@ -96,13 +102,15 @@ public class WebshopWebController {
     
     @GetMapping("/monitor")
     public String linkToMonitor(Model model) {
-        return "pcs";
+        model.addAttribute("products", webshopService.getProductList("Monitor"));
+        return "monitor";
     }
     
     // ----- HEADSET ----- //
     
     @GetMapping("/headset")
     public String linkToHeadset(Model model) {
+        model.addAttribute("products", webshopService.getProductList("Headset"));
         return "headset";
     }
     
@@ -110,6 +118,7 @@ public class WebshopWebController {
     
     @GetMapping("/keyboard")
     public String linkToKeyboard(Model model) {
+        model.addAttribute("products", webshopService.getProductList("Keyboard"));
         return "keyboard";
     }
     
@@ -117,6 +126,7 @@ public class WebshopWebController {
     
     @GetMapping("/mouse")
     public String linkToMouse(Model model) {
+        model.addAttribute("products", webshopService.getProductList("Mouse"));
         return "mouse";
     }
 }

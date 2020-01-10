@@ -12,5 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <div>TODO write content</div>
+        <div class="container">
+            <table class="">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.price}"></td>  
+                    <td th:text="${product.category}"></td>  
+                </tr>
+            </table>
+        </div>   
     </body>
 </html>

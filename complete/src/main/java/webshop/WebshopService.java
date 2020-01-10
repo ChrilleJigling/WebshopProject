@@ -56,7 +56,7 @@ public class WebshopService {
         accountRepository.save(account);
     }
     
-   /* public List getProductList(String category) {
+    public List getProductList(String category) {
         return productRepository.findByCategory(category);
-    }*/
+    }
 }
