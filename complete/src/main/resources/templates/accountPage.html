@@ -13,18 +13,7 @@ and open the template in the editor.
         <div class="headerText">ArCh Webshop</div>
     <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
     </head>
-    <body>
-        <div class="centerText">
-            <h3>Account Details:</h3>
-            <pre th:text="${message}">text</pre>   
-        </div>
-        
-        <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
-        <input type="text" th:field="*{keyword}" />
-         <div><input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> </div>
-    </form>
-
-        <div class="box">
+    <div class="box">
             <a class="button" href="pc">PC</a>
             <a class="button" href="laptop">Laptop</a>
             <a class="button" href="monitor">Monitor</a>
@@ -32,7 +21,19 @@ and open the template in the editor.
             <a class="button" href="keyboard">Keyboard</a>
             <a class="button" href="mouse">Mouse</a>
 
+    </div>
+    <body>
+        <div class="centerText">
+            <h3>Account Details:</h3>
+            <pre th:text="${message}">text</pre>   
         </div>
+        
+        <div class="centerFields">
+        <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
+        <input type="text" th:field="*{keyword}" />
+         <div><input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> </div>
+    </form>
+
         <table>
    <th:block class="searchResult" th:each="product : ${searchResults}">
       <tr>
@@ -43,6 +44,6 @@ and open the template in the editor.
       </tr>
    </th:block>
 </table>
-        
+        </div>    
     </body>
 </html>
