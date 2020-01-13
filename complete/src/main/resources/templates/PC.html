@@ -9,11 +9,13 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" type = "text/css" href = "style.css" />
     </head>
     <body>
-        <div>TODO write content</div> 
-        <div class="container">
-            <table class="">
+        <div class="headerText">ArCh Webshop</div>
+        <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
+        
+            <table id="customers">
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
@@ -25,6 +27,5 @@ and open the template in the editor.
                     <td th:text="${product.category}"></td>  
                 </tr>
             </table>
-        </div>   
     </body>
 </html>
