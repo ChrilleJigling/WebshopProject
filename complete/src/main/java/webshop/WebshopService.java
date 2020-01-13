@@ -33,14 +33,12 @@ public class WebshopService {
         return isLoggedIn;
     }
 
-    public String makeSearch(String keyword) {
+    public List makeSearch(String keyword) {
         String searchResult = "";
         List<Product> searchList = productRepository.findByNameIgnoreCaseContaining(keyword);
-        for (Product product : searchList) {
-            searchResult += product.toString() + "\n";
-        }
-        logger.info(searchResult);
-        return searchResult;
+        
+
+        return searchList;
     }
 
     public boolean isUsernameAvailable(String username) {

@@ -49,15 +49,16 @@ public class WebshopWebController {
             return "accountPage";
         } else {
             model.addAttribute("message", "You need to log in to access that page");
+            return "redirect:/login";
         }
-        return "redirect:/login";
+        
     }
 
     @PostMapping("/accountPage")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
         if (searchFormBean.keyword.length() > 0) {
-            String searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
-            model.addAttribute("searchResult", searchResult);
+            List<Product> searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
+            model.addAttribute("searchResults", searchResult);
         }
         return "/accountPage";
     }
