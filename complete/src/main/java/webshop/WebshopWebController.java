@@ -50,8 +50,13 @@ public class WebshopWebController {
         } else {
             model.addAttribute("message", "You need to log in to access that page");
             return "redirect:/login";
-        }
-        
+        }        
+    }
+    
+    @PostMapping("/accountPage")
+    public String addToCart(@ModelAttribute OrderLine orderLine, Model model) {
+        webshopService.addToCart(orderLine.getAccountId(), orderLine.getProductId(), orderLine.getNrOfProducts());
+        return "/accountPage";
     }
 
     @PostMapping("/accountPage")
