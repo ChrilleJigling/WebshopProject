@@ -36,7 +36,6 @@ public class WebshopService {
     }
 
     public List makeSearch(String keyword) {
-        String searchResult = "";
         List<Product> searchList = productRepository.findByNameIgnoreCaseContaining(keyword);
         return searchList;
     }
@@ -49,7 +48,9 @@ public class WebshopService {
             return true;
         }
     }
-
+public void addToCart(int productId, int nrOfProducts) {
+    OrderLine orderLine = new OrderLine(account.getId(), productId, nrOfProducts);
+}
     public boolean isPasswordSecure(String password) {
         if (password.length() > 3) {
             return true;

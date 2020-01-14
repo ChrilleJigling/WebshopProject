@@ -45,12 +45,11 @@ public class OrderLine implements Serializable {
     public OrderLine() {
     }
 
-    public OrderLine(int accountId, int productsId, int nrOfProducts) {
-        this.productId = productsId;
+    public OrderLine(int accountId, int productId, int nrOfProducts) {
+        this.productId = productId;
+        this.accountId= accountId;
         this.nrOfProducts = nrOfProducts;
-        this.accountId = accountId;
     }
-
     public int getNrOfProducts() {
         return nrOfProducts;
     }
@@ -99,11 +98,4 @@ public class OrderLine implements Serializable {
         this.orderNumber = orderNumber;
     }
 
-    public int getProductsId() {
-        return productId;
-    }
-
-    public void setProductsId(int productsId) {
-        this.productId = productsId;
-    }
 }
