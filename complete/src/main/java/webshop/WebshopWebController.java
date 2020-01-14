@@ -54,12 +54,18 @@ public class WebshopWebController {
         
     }
 
-    @PostMapping("/accountPage")
+    @PostMapping(path="/accountPage", params="keyword")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
         if (searchFormBean.keyword.length() > 0) {
             List<Product> searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
             model.addAttribute("searchResults", searchResult);
         }
+        return "/accountPage";
+    }
+    
+        @PostMapping(path = "/accountPage", params = "orderLine")
+    public String addToCart(@ModelAttribute OrderLine orderLine, Model model) {
+        webshopService.addToCart(orderLine.getProductId(), orderLine.getNrOfProducts());
         return "/accountPage";
     }
 

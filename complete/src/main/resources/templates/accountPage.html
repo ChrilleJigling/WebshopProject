@@ -33,9 +33,12 @@ and open the template in the editor.
             <a class="button" href="mouse">Mouse</a>
 
         </div>
+        
+        <form action="#" th:action="@{/accountPage}" th:object="${orderLine}" method="post">
         <table>
    <th:block class="searchResult" th:each="product : ${searchResults}">
       <tr>
+      <td th:text = "${product.id}"></td>
          <td th:text="${product.name}"></td> 
          <td th:text="${product.price}"></td> 
          <td> <input type="number" name="numberOf" min="0"/></td>
@@ -43,6 +46,6 @@ and open the template in the editor.
       </tr>
    </th:block>
 </table>
-        
+        </form>
     </body>
 </html>

@@ -39,9 +39,10 @@ public class OrderLine implements Serializable {
     public OrderLine() {
     }
 
-    public OrderLine(int orderNumber, int accountsId, int productsId) {
-        this.orderNumber = orderNumber;
-        this.productId = productsId;
+    public OrderLine(int accountId, int productId, int nrOfProducts) {
+        this.productId = productId;
+        this.accountId= accountId;
+        this.nrOfProducts = nrOfProducts;
     }
 
     public int getNrOfProducts() {
@@ -92,11 +93,4 @@ public class OrderLine implements Serializable {
         this.orderNumber = orderNumber;
     }
 
-    public int getProductsId() {
-        return productId;
-    }
-
-    public void setProductsId(int productsId) {
-        this.productId = productsId;
-    }
 }
