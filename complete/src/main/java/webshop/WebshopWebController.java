@@ -53,11 +53,11 @@ public class WebshopWebController {
         }        
     }
     
-    @PostMapping("/accountPage")
+  /*  @PostMapping("/accountPage")
     public String addToCart(@ModelAttribute OrderLine orderLine, Model model) {
-        webshopService.addToCart(orderLine.getAccountId(), orderLine.getProductId(), orderLine.getNrOfProducts());
+        webshopService.addToCart(orderLine.getProductId(), orderLine.getNrOfProducts());
         return "/accountPage";
-    }
+    } */
 
     @PostMapping("/accountPage")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {

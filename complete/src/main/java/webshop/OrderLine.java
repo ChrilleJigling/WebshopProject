@@ -4,17 +4,22 @@ package webshop;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
+@IdClass(OrderLineId.class)
 @Table(name="orderline")
 public class OrderLine implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_number")
     private int orderNumber;
 
@@ -25,11 +30,12 @@ public class OrderLine implements Serializable {
     @Column(name = "number_of_products")
     private int nrOfProducts;
     
+    @Id
     @Column(name = "account_id")
     private int accountId;
 
     @ManyToOne
-    @JoinColumn(name = "order_number")
+    @JoinColumn(name = "order_number", insertable=false, updatable=false)
     private Orders orders;
     
     @ManyToOne

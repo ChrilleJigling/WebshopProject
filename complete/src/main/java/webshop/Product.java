@@ -2,6 +2,7 @@ package webshop;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer product_id;
+    @Column(name = "product_id")
+    private Integer id;
 
     private String name;
     private double price;
@@ -36,11 +38,11 @@ public class Product implements Serializable {
     }
 
     public Integer getProduct_id() {
-        return product_id;
+        return id;
     }
 
     public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+        this.id = product_id;
     }
 
     public String getCategory() {
@@ -76,15 +78,15 @@ public class Product implements Serializable {
     }
 
     public int getId() {
-        return product_id;
+        return id;
     }
 
     public Product(Integer id) {
-        this.product_id = id;
+        this.id = id;
     }
 
     public Product(Integer id, String name, double price) {
-        this.product_id = id;
+        this.id = id;
         this.name = name;
         this.price = price;
     }
