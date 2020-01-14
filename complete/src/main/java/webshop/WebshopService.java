@@ -12,11 +12,13 @@ import org.springframework.web.context.annotation.SessionScope;
 public class WebshopService {
 
     Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
+    
     @Autowired
     AccountRepository accountRepository;
-
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    OrderLineRepository orderLineRepository;
 
     static boolean isLoggedIn;
     static Account account;
@@ -64,5 +66,10 @@ public void addToCart(int productId, int nrOfProducts) {
     
      public List getProductList(String category) {
         return productRepository.findByCategory(category);
+    }
+     
+    public void addToCart(int accountId, int productId, int nrOfProducts) {
+        OrderLine orderLine = new OrderLine(accountId, productId, nrOfProducts);
+        orderLineRepository.save(orderLine);
     }
 }

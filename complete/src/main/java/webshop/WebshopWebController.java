@@ -50,8 +50,7 @@ public class WebshopWebController {
         } else {
             model.addAttribute("message", "You need to log in to access that page");
             return "redirect:/login";
-        }
-        
+        }        
     }
 
     @PostMapping(path="/accountPage", params="keyword")

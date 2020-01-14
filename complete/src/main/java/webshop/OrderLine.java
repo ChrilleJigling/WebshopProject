@@ -44,7 +44,6 @@ public class OrderLine implements Serializable {
         this.accountId= accountId;
         this.nrOfProducts = nrOfProducts;
     }
-
     public int getNrOfProducts() {
         return nrOfProducts;
     }
