@@ -1,14 +1,10 @@
-
 package webshop;
 
 
 public class OrderLineBean {
     int productId;
     int nrOfProducts;
-    
-    public OrderLineBean() {
-        
-    }
+
     public int getProductId() {
         return productId;
     }

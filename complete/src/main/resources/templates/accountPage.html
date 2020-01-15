@@ -10,44 +10,53 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" type = "text/css" href = "style.css" />
-        <div class="headerText">ArCh Webshop</div>
+    <div class="headerText">ArCh Webshop</div>
     <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
-    </head>
-    <div class="box">
-            <a class="button" href="pc">PC</a>
-            <a class="button" href="laptop">Laptop</a>
-            <a class="button" href="monitor">Monitor</a>
-            <a class="button" href="headset">Headset</a>
-            <a class="button" href="keyboard">Keyboard</a>
-            <a class="button" href="mouse">Mouse</a>
+</head>
+<div class="box">
+    <a class="button" href="pc">PC</a>
+    <a class="button" href="laptop">Laptop</a>
+    <a class="button" href="monitor">Monitor</a>
+    <a class="button" href="headset">Headset</a>
+    <a class="button" href="keyboard">Keyboard</a>
+    <a class="button" href="mouse">Mouse</a>
+</div>
+<body>
+    <div class="centerText">
+        <h3>Account Details:</h3>
+        <pre th:text="${message}">text</pre>   
     </div>
-    <body>
-        <div class="centerText">
-            <h3>Account Details:</h3>
-            <pre th:text="${message}">text</pre>   
-        </div>
-        
+
     <div class="centerFields">
         <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
             <input type="text" th:field="*{keyword}" />
-             <div><input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> </div>
+            <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
         </form>
 
-<div class="centerFields">
-    <form action="#" th:action="@{/accountPage}" th:object="${orderLineBean}" method="post">
-        <table id="productsTable">
-            <th:block class="searchResult" th:each="product : ${searchResults}">
-            <tr>
-               <td th:text = "${product.id}"></td>
-               <td th:text="${product.name}"></td> 
-               <td th:text="${product.price}"></td> 
-               <td><input type="number" name="nrOfProducts" min="0"/></td>
-               <td><input class="button" type="submit" value="Add To Cart" /></td>
-               <td><a href="accountPage/buy/${product.id}">Buy Now</a></td>
-            </tr>
-            </th:block>
-        </table>
-        </form>
-    </div>    
-    </body>
+        <div class="centerFields">
+
+            <form action="#" th:action="@{/accountPage}" th:object="${orderLineBean}" method="post">
+                <table id="productsTable">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                    <th:block class="searchResult" th:each="product : ${searchResults}">
+                        <tr>
+                            <td <input type="hidden" th:text = "${product.id}"/> </td>
+                            <td th:text="${product.name}"></td> 
+                            <td th:text="${product.price}"></td> 
+                            <td> <input type="number" name="nrOfProducts"min="0"/></td>
+                            <td><input class="button" type="submit" value="Add To Cart" /></td>
+                            <td><a href="accountPage/buy/${product.id}">Buy Now</a></td>
+                        </tr>
+                    </th:block>
+                </table>
+            </form>
+
+        </div>    
+</body>
 </html>

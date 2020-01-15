@@ -52,6 +52,8 @@ public class WebshopWebController {
         if (webshopService.isLoggedIn) {
             model.addAttribute("searchFormBean", new SearchFormBean());
             model.addAttribute("message", webshopService.account.getUsername());
+            List<Product> searchResult = webshopService.makeSearch("ArCh");
+            model.addAttribute("searchResults", searchResult);
             return "accountPage";
         } else {
             model.addAttribute("message", "You need to log in to access that page");
@@ -68,9 +70,9 @@ public class WebshopWebController {
         return "/accountPage";
     }
     
-    @PostMapping(path = "/accountPage", params = "orderLine")
-    public String addToCart(@ModelAttribute OrderLineBean orderLine, Model model) {
-        webshopService.addToCart(1, orderLine.getProductId(), orderLine.getNrOfProducts());
+        @PostMapping(path = "/accountPage")
+    public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
+        webshopService.addToCart(1, orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "/accountPage";
     }
     
