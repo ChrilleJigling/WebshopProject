@@ -80,4 +80,9 @@ public class WebshopService {
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
     }
+    
+    public void addProduct(Product product) {
+        Product products = new Product(product.getName(), product.getPrice(), product.getCategory());
+        productRepository.save(products);
+    }
 }

@@ -70,7 +70,7 @@ public class WebshopWebController {
         return "/accountPage";
     }
     
-        @PostMapping(path = "/accountPage")
+    @PostMapping(path = "/accountPage")
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.addToCart(1, orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "/accountPage";
@@ -88,20 +88,38 @@ public class WebshopWebController {
     // ----- ADMIN ----- //
     
     @GetMapping("/adminAccountPage")
-    public String register(Model model) {
+    public String adminAccountPage(Model model) {
         model.addAttribute("message", webshopService.account.getUsername());
-        return "adminAccountPage";
+        return "/adminAccountPage";
+    }
+    
+    @GetMapping("/orders")
+    public String orders(Model model) {
+        model.addAttribute("message", webshopService.account.getUsername());
+        return "/adminAccountPage";
+    }
+    
+    @GetMapping("/addProduct")
+    public String addProduct(Model model) {
+        return "/addProduct";
+    }
+    
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute Product product, Model model) {
+        if (webshopService.isAdmin) {
+            webshopService.addProduct(product);
+        }
+       return "adminAccountPage";
     }
     
     // ----- REGISTER ----- //
     @GetMapping("/register")
-    public String register(Model model, LoginFormBean loginFormBean) {
+    public String register(Model model) {
         return "register";
     }
 
     @PostMapping("/register")
     public String registerSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {
-
         if (webshopService.isUsernameAvailable(loginFormBean.getUsername())) {
             if (webshopService.isPasswordSecure(loginFormBean.getPassword())) {
                 webshopService.registerAccount(loginFormBean.getUsername(), loginFormBean.getPassword());

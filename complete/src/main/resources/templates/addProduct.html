@@ -11,13 +11,19 @@
     </head>
     <div class="box">
             <a class="button" href="orders">Orders</a>
-            <a class="button" href="addProduct">Add Product</a>
+            <a class="button" href="adminAccountPage">Account Page</a>
     </div>
     <body>
         <div class="centerText">
             <h3>Account Details:</h3>
             <pre th:text="${message}">text</pre>   
         </div>
-         
+         <div class="centerFields">
+        <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
+            <input type="text" th:field="*{product.name}" />
+            <input type="text" th:field="*{product.price}" />
+            <input type="text" th:field="*{product.category}" />
+            <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
+        </form>
     </body>
 </html>
