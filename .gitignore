@@ -32,3 +32,4 @@ dependency-reduced-pom.xml
 .vscode/
 README.html
 /complete/nbproject/
+complete/src/main/resources/application.properties
