@@ -2,9 +2,9 @@ package webshop;
 
 public class ProductBean {
 
-    private String name;
-    private Double price;
-    private String category;
+    String name;
+    double price;
+    String category;
 
     public String getName() {
         return name;
@@ -29,4 +29,5 @@ public class ProductBean {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }

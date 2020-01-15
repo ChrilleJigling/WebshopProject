@@ -36,9 +36,9 @@ public class WebshopWebController {
     public String loginSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {
         if (webshopService.login(loginFormBean.username, loginFormBean.password)) {
             if (webshopService.isAdmin) {
-               return "redirect:/adminAccountPage";
+                return "redirect:/adminAccountPage";
             } else {
-               return "redirect:/accountPage";
+                return "redirect:/accountPage";
             }
         } else {
             model.addAttribute("message", "No such user, try again");
@@ -58,10 +58,10 @@ public class WebshopWebController {
         } else {
             model.addAttribute("message", "You need to log in to access that page");
             return "redirect:/login";
-        }        
+        }
     }
 
-    @PostMapping(path="/accountPage", params="keyword")
+    @PostMapping(path = "/accountPage", params = "keyword")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
         if (searchFormBean.keyword.length() > 0) {
             List<Product> searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
@@ -69,13 +69,13 @@ public class WebshopWebController {
         }
         return "/accountPage";
     }
-    
+
     @PostMapping(path = "/accountPage")
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.addToCart(1, orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "/accountPage";
     }
-    
+
     @RequestMapping(value = "accountPage/buy/{id}", method = RequestMethod.GET)
     public String buy(@PathVariable("id") String id, HttpSession session) {
         logger.info(id);
@@ -84,34 +84,40 @@ public class WebshopWebController {
         webshopService.addToCart(1, ids, 2);
         return "redirect:/accountPage";
     }
-    
+
     // ----- ADMIN ----- //
-    
+    @GetMapping("/addProduct")
+    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
+        if (webshopService.isAdmin) {
+            model.addAttribute("product", new ProductBean());
+            return "/addProduct";
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
+        webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
+        return "adminAccountPage";
+    }
+
     @GetMapping("/adminAccountPage")
     public String adminAccountPage(Model model) {
-        model.addAttribute("message", webshopService.account.getUsername());
-        return "/adminAccountPage";
+        if (webshopService.isAdmin) {
+            model.addAttribute("message", webshopService.account.getUsername());
+            return "/adminAccountPage";
+        } else {
+            return "redirect:/login";
+        }
+
     }
-    
+
     @GetMapping("/orders")
     public String orders(Model model) {
         model.addAttribute("message", webshopService.account.getUsername());
         return "/adminAccountPage";
     }
-    
-    @GetMapping("/addProduct")
-    public String addProduct(Model model) {
-        return "/addProduct";
-    }
-    
-    @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute Product product, Model model) {
-        if (webshopService.isAdmin) {
-            webshopService.addProduct(product);
-        }
-       return "adminAccountPage";
-    }
-    
+
     // ----- REGISTER ----- //
     @GetMapping("/register")
     public String register(Model model) {
@@ -132,21 +138,6 @@ public class WebshopWebController {
             model.addAttribute("message", "That username is already in use");
             return "register";
         }
-    }
-    
-    @GetMapping("/addProduct")
-    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
-        if (webshopService.isAdmin) {
-            model.addAttribute("product", new ProductBean());
-            return "addProduct";
-        }
-       return "redirect:/login";
-    }
-    
-     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
-        webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
-        return "adminAccountPage";
     }
 
     // ----- PC ----- //

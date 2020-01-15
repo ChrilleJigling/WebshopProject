@@ -26,6 +26,7 @@ public class WebshopService {
     
     public boolean login(String accountName, String password) {
         isLoggedIn = false;
+        isAdmin= false;
         List<Account> a = accountRepository.findByUsername(accountName);
         if (a.size() > 0) {
             account = a.get(0);
@@ -80,11 +81,6 @@ public class WebshopService {
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
     }
-    
- /*   public void addProduct(Product product) {
-        Product products = new Product(product.getName(), product.getPrice(), product.getCategory());
-        productRepository.save(products);
-    }*/
     
     public void addProduct(String name, double price, String category){
     Product product = new Product(name, price, category);
