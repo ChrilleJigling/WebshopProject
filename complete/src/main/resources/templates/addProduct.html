@@ -14,7 +14,7 @@
 	<h1>Register new account</h1>
 	<span th:text="${message}">text</span>
         
-    <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
+    <form action="#" th:action="@{/addProduct}" th:object="${productBean}" method="post">
         <p>Name: <input type="text" th:field="*{name}" /></p>
          <p>Price : <input type="text" th:field="*{price}" /></p>
          <p>Category : <input type="text" th:field="*{category}" /></p>

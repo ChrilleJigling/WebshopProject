@@ -31,18 +31,17 @@ public class Product implements Serializable {
     }
 
     public Product(String name, double price, String category) {
-        super();
         this.name = name;
         this.price = price;
         this.category = category;
     }
 
-    public Integer getProduct_id() {
+    public Integer getId() {
         return id;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.id = product_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCategory() {
@@ -75,10 +74,6 @@ public class Product implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Product(Integer id) {

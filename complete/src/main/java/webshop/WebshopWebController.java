@@ -117,17 +117,17 @@ public class WebshopWebController {
     }
     
     @GetMapping("/addProduct")
-    public String createProduct(@ModelAttribute Product product, Model model) {
+    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
         if (webshopService.isAdmin) {
-            model.addAttribute("product", new Product());
+            model.addAttribute("product", new ProductBean());
             return "addProduct";
         }
-       return "login";
+       return "redirect:/login";
     }
     
      @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute Product product, Model model) {
-        webshopService.addProduct(product.getName(), product.getPrice(), product.getCategory());
+    public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
+        webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
         return "adminAccountPage";
     }
 
