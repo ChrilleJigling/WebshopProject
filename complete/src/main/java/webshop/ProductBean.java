@@ -1,10 +1,10 @@
-
 package webshop;
 
 public class ProductBean {
-    String name;
-    double price;
-    String category;
+
+    private String name;
+    private Double price;
+    private String category;
 
     public String getName() {
         return name;

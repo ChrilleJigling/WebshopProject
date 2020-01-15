@@ -27,7 +27,6 @@ and open the template in the editor.
         <pre th:text="${message}">text</pre>   
     </div>
 
-    <div class="centerFields">
         <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
             <input type="text" th:field="*{keyword}" />
             <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
