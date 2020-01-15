@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>ArCh Webshop</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" type = "text/css" href = "style.css" />
-        <div class="headerText">ArCh Webshop</div>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>ArCh Webshop</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+</head>
+<body>
+    
+    <div class="headerText">ArCh Webshop</div>
     <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
-    </head>
-    <div class="box">
-            <a class="button" href="orders">Orders</a>
-            <a class="button" href="adminAccountPage">Account Page</a>
-    </div>
-    <body>
-        <div class="centerText">
-            <h3>Account Details:</h3>
-            <pre th:text="${message}">text</pre>   
-        </div>
-         <div class="centerFields">
-        <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
-            <input type="text" th:field="*{product.name}" />
-            <input type="text" th:field="*{product.price}" />
-            <input type="text" th:field="*{product.category}" />
-            <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
-        </form>
-    </body>
+    <div class="centerText">
+	<h1>Register new account</h1>
+	<span th:text="${message}">text</span>
+        
+    <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+         <p>Price : <input type="text" th:field="*{price}" /></p>
+         <p>Category : <input type="text" th:field="*{category}" /></p>
+        <p><input class="button" type="submit" value="Add Product" /> <input class="button" type="reset" value="Clear" /> <a class="button2" href="login">Back</a></p>
+    </form>
+    </div>    
+</body>
 </html>

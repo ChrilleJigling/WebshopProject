@@ -133,6 +133,21 @@ public class WebshopWebController {
             return "register";
         }
     }
+    
+    @GetMapping("/addProduct")
+    public String createProduct(@ModelAttribute Product product, Model model) {
+        if (webshopService.isAdmin) {
+            model.addAttribute("product", new Product());
+            return "addProduct";
+        }
+       return "login";
+    }
+    
+     @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute Product product, Model model) {
+        webshopService.addProduct(product.getName(), product.getPrice(), product.getCategory());
+        return "adminAccountPage";
+    }
 
     // ----- PC ----- //
     @GetMapping("/pc")
