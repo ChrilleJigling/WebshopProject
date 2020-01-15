@@ -33,7 +33,6 @@ and open the template in the editor.
             <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
         </form>
 
-
         <div class="centerFields">
 
             <form action="#" th:action="@{/accountPage}" th:object="${orderLineBean}" method="post">
@@ -52,6 +51,7 @@ and open the template in the editor.
                             <td th:text="${product.price}"></td> 
                             <td> <input type="number" name="nrOfProducts"min="0"/></td>
                             <td><input class="button" type="submit" value="Add To Cart" /></td>
+                            <td><a href="accountPage/buy/${product.id}">Buy Now</a></td>
                         </tr>
                     </th:block>
                 </table>
