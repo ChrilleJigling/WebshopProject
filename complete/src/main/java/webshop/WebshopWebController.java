@@ -24,6 +24,7 @@ public class WebshopWebController {
     @Autowired
     WebshopService webshopService;
 
+    
     // ----- LOGIN ----- //
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -46,7 +47,9 @@ public class WebshopWebController {
         }
     }
 
+    
     // ----- ACCOUNT PAGE ----- //
+    
     @GetMapping("/accountPage")
     public String accountInformation(Model model) {
         if (webshopService.isLoggedIn) {
@@ -85,6 +88,7 @@ public class WebshopWebController {
         return "redirect:/accountPage";
     }
     
+    
     // ----- ADMIN ----- //
     
     @GetMapping("/adminAccountPage")
@@ -93,26 +97,42 @@ public class WebshopWebController {
         return "/adminAccountPage";
     }
     
-    @GetMapping("/orders")
+    /*@GetMapping("/orders")
     public String orders(Model model) {
         model.addAttribute("message", webshopService.account.getUsername());
+        return "/adminAccountPage";
+    }*/
+    
+   /* @GetMapping("/addProduct")
+    public String linkToAddProduct(Model model) {
+        return "/addProduct";
+    }*/
+    
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
+        webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
         return "/adminAccountPage";
     }
     
     @GetMapping("/addProduct")
-    public String addProduct(Model model) {
-        return "/addProduct";
+    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
+        if (webshopService.isAdmin) {
+            model.addAttribute("product", new ProductBean());
+            return "/addProduct";
+        }
+       return "redirect:/login";
     }
     
-    @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute Product product, Model model) {
-        if (webshopService.isAdmin) {
-            webshopService.addProduct(product);
-        }
-       return "adminAccountPage";
+    @GetMapping("/orders")
+    public String linkToOrders(Model model) {
+        model.addAttribute("orders", webshopService.getOrders());
+        return "/orders";
     }
+    
+    
     
     // ----- REGISTER ----- //
+    
     @GetMapping("/register")
     public String register(Model model) {
         return "register";
@@ -133,58 +153,55 @@ public class WebshopWebController {
             return "register";
         }
     }
+ 
     
-    @GetMapping("/addProduct")
-    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
-        if (webshopService.isAdmin) {
-            model.addAttribute("product", new ProductBean());
-            return "addProduct";
-        }
-       return "redirect:/login";
-    }
-    
-     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
-        webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
-        return "adminAccountPage";
-    }
-
     // ----- PC ----- //
+    
     @GetMapping("/pc")
     public String linkToPC(Model model) {
         model.addAttribute("products", webshopService.getProductList("PC"));
         return "pc";
     }
 
+    
     // ----- LAPTOP ----- //
+    
     @GetMapping("/laptop")
     public String linkToLaptop(Model model) {
         model.addAttribute("products", webshopService.getProductList("Laptop"));
         return "laptop";
     }
 
+    
     // ----- MONITOR ----- //
+    
     @GetMapping("/monitor")
     public String linkToMonitor(Model model) {
         model.addAttribute("products", webshopService.getProductList("Monitor"));
         return "monitor";
     }
 
+    
     // ----- HEADSET ----- //
+    
     @GetMapping("/headset")
     public String linkToHeadset(Model model) {
         model.addAttribute("products", webshopService.getProductList("Headset"));
         return "headset";
     }
 
+    
     // ----- KEYBOARD ----- //
+    
     @GetMapping("/keyboard")
     public String linkToKeyboard(Model model) {
         model.addAttribute("products", webshopService.getProductList("Keyboard"));
         return "keyboard";
     }
 
+    
     // ----- MOUSE ----- //
+    
     @GetMapping("/mouse")
     public String linkToMouse(Model model) {
         model.addAttribute("products", webshopService.getProductList("Mouse"));

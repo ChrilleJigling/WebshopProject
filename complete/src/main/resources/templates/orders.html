@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    </head>
+    <body>
+        <div class="headerText">ArCh Webshop</div>
+        <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
+        
+            <table id="productsTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="${order.AccountId}"></td>  
+                    <td <input type="checkbox" name="" value="checked" </td>  
+                </tr>
+            </table>
+    </body>
+</html>

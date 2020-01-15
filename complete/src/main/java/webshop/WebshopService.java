@@ -19,6 +19,8 @@ public class WebshopService {
     ProductRepository productRepository;
     @Autowired
     OrderLineRepository orderLineRepository;
+    @Autowired
+    OrdersRepository ordersRepository;
 
     static boolean isLoggedIn;
     static boolean isAdmin;
@@ -26,6 +28,7 @@ public class WebshopService {
     
     public boolean login(String accountName, String password) {
         isLoggedIn = false;
+        isAdmin = false;
         List<Account> a = accountRepository.findByUsername(accountName);
         if (a.size() > 0) {
             account = a.get(0);
@@ -90,4 +93,12 @@ public class WebshopService {
     Product product = new Product(name, price, category);
     productRepository.save(product);
 }
+    
+    public List getOrdersByOrderNumber() {
+        return ordersRepository.findByAccountId(account.getId());
+    }
+    
+    public List getOrders() {
+        return ordersRepository.findAll();
+    }
 }

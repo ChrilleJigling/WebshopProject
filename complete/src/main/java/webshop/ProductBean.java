@@ -3,7 +3,7 @@ package webshop;
 public class ProductBean {
 
     private String name;
-    private Double price;
+    private double price;
     private String category;
 
     public String getName() {
