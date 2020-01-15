@@ -29,4 +29,5 @@ public class ProductBean {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }
