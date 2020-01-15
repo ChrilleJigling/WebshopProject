@@ -2,6 +2,7 @@ package webshop;
 
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,15 +55,6 @@ public class WebshopWebController {
         }        
     }
 
-    
-  /*  @PostMapping("/accountPage")
-    public String addToCart(@ModelAttribute OrderLine orderLine, Model model) {
-        webshopService.addToCart(orderLine.getProductId(), orderLine.getNrOfProducts());
-        return "/accountPage";
-    } */
-
-
-
     @PostMapping(path="/accountPage", params="keyword")
     public String search(@ModelAttribute SearchFormBean searchFormBean, Model model) {
         if (searchFormBean.keyword.length() > 0) {
@@ -71,10 +64,19 @@ public class WebshopWebController {
         return "/accountPage";
     }
     
-        @PostMapping(path = "/accountPage", params = "orderLine")
-    public String addToCart(@ModelAttribute OrderLine orderLine, Model model) {
-        webshopService.addToCart(orderLine.getProductId(), orderLine.getNrOfProducts());
+    @PostMapping(path = "/accountPage", params = "orderLine")
+    public String addToCart(@ModelAttribute OrderLineBean orderLine, Model model) {
+        webshopService.addToCart(1, orderLine.getProductId(), orderLine.getNrOfProducts());
         return "/accountPage";
+    }
+    
+    @RequestMapping(value = "accountPage/buy/{id}", method = RequestMethod.GET)
+    public String buy(@PathVariable("id") String id, HttpSession session) {
+        logger.info(id);
+        int ids = Integer.valueOf(id);
+        List<Product> productList = webshopService.getProductListById(ids);
+        webshopService.addToCart(1, ids, 2);
+        return "redirect:/accountPage";
     }
 
     // ----- REGISTER ----- //

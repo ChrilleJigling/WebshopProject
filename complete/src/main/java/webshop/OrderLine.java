@@ -45,10 +45,11 @@ public class OrderLine implements Serializable {
     public OrderLine() {
     }
 
-    public OrderLine(int accountId, int productId, int nrOfProducts) {
+    public OrderLine(int orderNumber, int accountId, int productId, int nrOfProducts) {
         this.productId = productId;
         this.accountId= accountId;
         this.nrOfProducts = nrOfProducts;
+        this.orderNumber = orderNumber;
     }
     public int getNrOfProducts() {
         return nrOfProducts;
