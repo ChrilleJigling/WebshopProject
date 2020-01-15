@@ -35,7 +35,11 @@ public class WebshopWebController {
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute LoginFormBean loginFormBean, Model model) {
         if (webshopService.login(loginFormBean.username, loginFormBean.password)) {
-            return "redirect:/accountPage";
+            if (webshopService.isAdmin) {
+               return "redirect:/adminAccountPage";
+            } else {
+               return "redirect:/accountPage";
+            }
         } else {
             model.addAttribute("message", "No such user, try again");
             return "login";
@@ -78,7 +82,15 @@ public class WebshopWebController {
         webshopService.addToCart(1, ids, 2);
         return "redirect:/accountPage";
     }
-
+    
+    // ----- ADMIN ----- //
+    
+    @GetMapping("/adminAccountPage")
+    public String register(Model model) {
+        model.addAttribute("message", webshopService.account.getUsername());
+        return "adminAccountPage";
+    }
+    
     // ----- REGISTER ----- //
     @GetMapping("/register")
     public String register(Model model, LoginFormBean loginFormBean) {

@@ -21,6 +21,7 @@ public class WebshopService {
     OrderLineRepository orderLineRepository;
 
     static boolean isLoggedIn;
+    static boolean isAdmin;
     static Account account;
     
     public boolean login(String accountName, String password) {
@@ -29,7 +30,12 @@ public class WebshopService {
         if (a.size() > 0) {
             account = a.get(0);
             if (password.equals(account.getPassword())) {
-                isLoggedIn = true;
+                if (account.getIsAdmin() == 1) {
+                    isLoggedIn = true;
+                    isAdmin = true;
+                } else {
+                    isLoggedIn = true;
+                } 
             }
         }
         return isLoggedIn;
