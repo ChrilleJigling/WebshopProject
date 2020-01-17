@@ -54,6 +54,7 @@ public class WebshopWebController {
     public String accountInformation(Model model) {
         if (webshopService.isLoggedIn) {
             model.addAttribute("searchFormBean", new SearchFormBean());
+            model.addAttribute("orderLineBean", new OrderLineBean());
             model.addAttribute("message", webshopService.account.getUsername());
             List<Product> searchResult = webshopService.makeSearch("ArCh");
             model.addAttribute("searchResults", searchResult);
@@ -69,25 +70,31 @@ public class WebshopWebController {
         if (searchFormBean.keyword.length() > 0) {
             List<Product> searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
             model.addAttribute("searchResults", searchResult);
+                        model.addAttribute("searchFormBean", new SearchFormBean());
+            model.addAttribute("orderLineBean", new OrderLineBean());
         }
         return "/accountPage";
     }
 
-    @PostMapping(path = "/accountPage")
+    /*@PostMapping(path = "/accountPage")
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.addToCart(1, orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "/accountPage";
     }
-
-    @RequestMapping(value = "accountPage/buy/{id}", method = RequestMethod.GET)
-    public String buy(@PathVariable("id") String id, HttpSession session) {
-        logger.info(id);
-        int ids = Integer.valueOf(id);
-        List<Product> productList = webshopService.getProductListById(ids);
-        webshopService.addToCart(1, ids, 2);
+*/
+        @PostMapping(path = "/accountPage")
+    public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
+        webshopService.addToCart(4, orderLineBean.getNrOfProducts());            
+        
         return "redirect:/accountPage";
     }
-
+        /*@PostMapping(path = "/webshop/buy")
+    public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
+        logger.info("-------"+String.valueOf(orderLineBean.getProductId()));
+        logger.info("-------"+String.valueOf(orderLineBean.getNrOfProducts()));
+        webshopService.addToCart(1, orderLineBean.getNrOfProducts());
+        return "/accountPage";
+    }*/
     
     // ----- ADMIN ----- //
     @GetMapping("/addProduct")
@@ -130,9 +137,14 @@ public class WebshopWebController {
     
     @GetMapping("/orders")
     public String linkToOrders(Model model) {
-        model.addAttribute("orders", webshopService.getOrders());
+        if(webshopService.isAdmin){
+            model.addAttribute("orders", webshopService.getOrders());
         model.addAttribute("message", webshopService.account.getUsername());
         return "/orders";
+        } else {
+            return "redirect:/login";
+        }
+        
     }
     
 

@@ -76,8 +76,8 @@ public class WebshopService {
         return productRepository.findByCategory(category);
     }
      
-    public void addToCart(int orderNumber, int productId, int nrOfProducts) {
-        OrderLine orderLine = new OrderLine(orderNumber, account.getId(), productId, nrOfProducts);
+    public void addToCart(int productId, int nrOfProducts) {
+        OrderLine orderLine = new OrderLine(1,1,productId, nrOfProducts);
         orderLineRepository.save(orderLine);
     }
     
