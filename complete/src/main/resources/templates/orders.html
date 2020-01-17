@@ -13,9 +13,9 @@
         
             <table id="productsTable">
                 <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
+                    <th>Order Number</th>
+                    <th>Account ID</th>
+                    <th>Mark as Sent</th>
                 </tr>
                 <tr th:each="order : ${orders}">
                     <td th:text="${order.orderNumber}"></td>

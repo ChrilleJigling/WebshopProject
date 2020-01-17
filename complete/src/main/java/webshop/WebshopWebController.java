@@ -91,7 +91,7 @@ public class WebshopWebController {
     
     // ----- ADMIN ----- //
     @GetMapping("/addProduct")
-    public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
+    public String linkToAddProduct(@ModelAttribute ProductBean productBean, Model model) {
         if (webshopService.isAdmin) {
             model.addAttribute("product", new ProductBean());
             return "/addProduct";
@@ -101,6 +101,7 @@ public class WebshopWebController {
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
+        
         webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
         return "adminAccountPage";
     }

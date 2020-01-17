@@ -10,13 +10,13 @@
     <div class="headerText">ArCh Webshop</div>
     <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
     <div class="centerText">
-	<h1>Register new account</h1>
+	<h1>Add New Product</h1>
 	<span th:text="${message}">text</span>
         
     <form action="#" th:action="@{/addProduct}" th:object="${productBean}" method="post">
         <p>Name: <input type="text" th:field="*{name}" /></p>
          <p>Price : <input type="text" th:field="*{price}" /></p>
-         <p>Category : <input type="text" th:field="*{category}" /></p>
+         <p>Category: <input type="text" th:field="*{category}" /></p>
         <p><input class="button" type="submit" value="Add Product" /> <input class="button" type="reset" value="Clear" /> <a class="button2" href="login">Back</a></p>
     </form>
     </div>    
