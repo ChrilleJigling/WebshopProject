@@ -81,14 +81,18 @@ public class WebshopService {
         orderLineRepository.save(orderLine);
     }
     
+    public List getOrderLineList(int orderNumber) {
+        return orderLineRepository.findByOrderNumber(orderNumber);
+    }
+    
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
     }
     
     public void addProduct(String name, double price, String category){
-    Product product = new Product(name, price, category);
-    productRepository.save(product);
-}
+        Product product = new Product(name, price, category);
+        productRepository.save(product);
+    }
     
     public List getOrdersByOrderNumber() {
         return ordersRepository.findByAccountId(account.getId());
@@ -98,5 +102,14 @@ public class WebshopService {
         return ordersRepository.findAll();
     }
     
-    public 
+    public void markOrderAsSent(int orderNumber) {
+        logger.info("SERVICE");
+        logger.info(String.valueOf(orderNumber));
+        List<Orders> orders = ordersRepository.findByOrderNumber(orderNumber);
+        Orders order = orders.get(0);
+        order.setSent("YES");
+        ordersRepository.save(order);
+    }
+    
+    
 }

@@ -10,18 +10,30 @@
     <body>
         <div class="headerText">ArCh Webshop</div>
         <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
+        
             <table id="productsTable">
                 <tr>
                     <th>Order Number</th>
                     <th>Account ID</th>
                     <th>Sent</th>
-                   
+                    <th></th>
                 </tr>
-                <tr th:each="order : ${orders}">
-                    <td th:text="${order.orderNumber}"></td>
-                    <td th:text="${order.AccountId}"></td>  
-                    <td <input type="checkbox" name="vehicle" value="Bike"/>wwwewfwf </td>
+                <th:block class="" th:each="order : ${orders}">
+                <tr>           
+                    <td th:text="${order.orderNumber}"</td>
+                    <td th:text="${order.accountId}"</td> 
+                    <td th:text="${order.sent}"></td>     
+                    <form action="#" th:action="@{/markAsSent}" th:object="${ordersBean}" method="post">
+                        <input type="hidden" th:value="${order.orderNumber}" name="orderNumber"/>
+                        <td><input type="submit" value="SEND"/></td>
+                    </form>
+                    <form action="#" th:action="@{/orderDetails}" th:object="${ordersBean}" method="post">
+                        <input type="hidden" th:value="${order.orderNumber}" name="orderNumber"/>
+                        <td><input type="submit" value="Order Details"/></td>
+                    </form>
                 </tr>
+                </th:block>
             </table>
+        
     </body>
 </html>

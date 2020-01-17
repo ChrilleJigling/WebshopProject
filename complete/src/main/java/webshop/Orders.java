@@ -43,9 +43,10 @@ public class Orders implements Serializable {
         super();
     }
 
-     public Orders(List ProductList, int accountsId) {
+     public Orders(int accountsId, String sent) {
         super();
         this.accountId = accountsId;
+        this.sent = sent;
     }
 
     public String getSent() {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    </head>
+    <body>
+        <div class="headerText">ArCh Webshop</div>
+        <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
+        
+            <table id="productsTable">
+                <tr>
+                    <th>Order Number</th>
+                    <th>Account ID</th>
+                    <th>Sent</th>
+                    <th></th>
+                </tr>
+                <th:block class="" th:each="orderLine : ${orderLines}">
+                <tr>           
+                    <td th:text="${orderLine.orderNumber}"</td>
+                    <td th:text="${orderLine.productId}"</td> 
+                    <td th:text="${orderLine.accountId}"></td> 
+                    <td th:text="${orderLine.nrOfProducts}"></td>  
+                </tr>
+                </th:block>
+            </table>
+        
+    </body>
+</html>
