@@ -24,7 +24,6 @@ public class WebshopWebController {
     @Autowired
     WebshopService webshopService;
 
-    
     // ----- LOGIN ----- //
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -47,9 +46,7 @@ public class WebshopWebController {
         }
     }
 
-    
     // ----- ACCOUNT PAGE ----- //
-    
     @GetMapping("/accountPage")
     public String accountInformation(Model model) {
         if (webshopService.isLoggedIn) {
@@ -70,7 +67,7 @@ public class WebshopWebController {
         if (searchFormBean.keyword.length() > 0) {
             List<Product> searchResult = webshopService.makeSearch(searchFormBean.getKeyword());
             model.addAttribute("searchResults", searchResult);
-                        model.addAttribute("searchFormBean", new SearchFormBean());
+            model.addAttribute("searchFormBean", new SearchFormBean());
             model.addAttribute("orderLineBean", new OrderLineBean());
         }
         return "/accountPage";
@@ -81,21 +78,17 @@ public class WebshopWebController {
         webshopService.addToCart(1, orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "/accountPage";
     }
-*/
-        @PostMapping(path = "/accountPage")
+     */
+    @PostMapping(path = "/accountPage")
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
-        webshopService.addToCart(4, orderLineBean.getNrOfProducts());            
-        
-        return "redirect:/accountPage";
+            logger.info("-------" + String.valueOf(orderLineBean.getProductId()));
+            logger.info("-------" + String.valueOf(orderLineBean.getNrOfProducts()));
+
+            webshopService.addToCart(orderLineBean.getNrOfProducts(), orderLineBean.getNrOfProducts());
+            return "redirect:/accountPage";
+
     }
-        /*@PostMapping(path = "/webshop/buy")
-    public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
-        logger.info("-------"+String.valueOf(orderLineBean.getProductId()));
-        logger.info("-------"+String.valueOf(orderLineBean.getNrOfProducts()));
-        webshopService.addToCart(1, orderLineBean.getNrOfProducts());
-        return "/accountPage";
-    }*/
-    
+
     // ----- ADMIN ----- //
     @GetMapping("/addProduct")
     public String createProduct(@ModelAttribute ProductBean productBean, Model model) {
@@ -122,34 +115,29 @@ public class WebshopWebController {
         }
 
     }
-    
+
     /*@GetMapping("/orders")
     public String orders(Model model) {
         model.addAttribute("message", webshopService.account.getUsername());
         return "/adminAccountPage";
     }*/
-    
-   /* @GetMapping("/addProduct")
+ /* @GetMapping("/addProduct")
     public String linkToAddProduct(Model model) {
         return "/addProduct";
     }*/
-    
-    
     @GetMapping("/orders")
     public String linkToOrders(Model model) {
-        if(webshopService.isAdmin){
+        if (webshopService.isAdmin) {
             model.addAttribute("orders", webshopService.getOrders());
-        model.addAttribute("message", webshopService.account.getUsername());
-        return "/orders";
+            model.addAttribute("message", webshopService.account.getUsername());
+            return "/orders";
         } else {
             return "redirect:/login";
         }
-        
+
     }
-    
 
     // ----- REGISTER ----- //
-    
     @GetMapping("/register")
     public String register(Model model) {
         return "register";
@@ -171,54 +159,42 @@ public class WebshopWebController {
         }
     }
 
-    
     // ----- PC ----- //
-    
     @GetMapping("/pc")
     public String linkToPC(Model model) {
         model.addAttribute("products", webshopService.getProductList("PC"));
         return "pc";
     }
 
-    
     // ----- LAPTOP ----- //
-    
     @GetMapping("/laptop")
     public String linkToLaptop(Model model) {
         model.addAttribute("products", webshopService.getProductList("Laptop"));
         return "laptop";
     }
 
-    
     // ----- MONITOR ----- //
-    
     @GetMapping("/monitor")
     public String linkToMonitor(Model model) {
         model.addAttribute("products", webshopService.getProductList("Monitor"));
         return "monitor";
     }
 
-    
     // ----- HEADSET ----- //
-    
     @GetMapping("/headset")
     public String linkToHeadset(Model model) {
         model.addAttribute("products", webshopService.getProductList("Headset"));
         return "headset";
     }
 
-    
     // ----- KEYBOARD ----- //
-    
     @GetMapping("/keyboard")
     public String linkToKeyboard(Model model) {
         model.addAttribute("products", webshopService.getProductList("Keyboard"));
         return "keyboard";
     }
 
-    
     // ----- MOUSE ----- //
-    
     @GetMapping("/mouse")
     public String linkToMouse(Model model) {
         model.addAttribute("products", webshopService.getProductList("Mouse"));

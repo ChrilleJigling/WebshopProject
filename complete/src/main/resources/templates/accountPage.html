@@ -27,34 +27,35 @@ and open the template in the editor.
         <pre th:text="${message}">text</pre>   
     </div>
 
-        <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
-            <input type="text" th:field="*{keyword}" />
-            <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
-        </form>
+    <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
+        <input type="text" th:field="*{keyword}" />
+        <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
+    </form>
 
-        <div class="centerFields">
+    <div class="centerFields">
+        <pre th:text="${errorMessage}"></pre>  
+        <table id="productsTable">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
 
-            <form action="#" th:action="@{/accountPage}" th:object="${orderLineBean}" method="post">
-                <table id="productsTable">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th></th>
-                    </tr>
-                    <th:block class="searchResult" th:each="product : ${searchResults}">
-                        <tr>
-                            <td <input type="hidden" th:text = "${product.id}"/> </td>
-                            <td th:text="${product.name}"></td> 
-                            <td th:text="${product.price}"></td> 
-                            <td> <input type="number" name="nrOfProducts" min="0"/></td>
-                            <td><input class="button" type="submit" value="Add To Cart" /></td>
-                        </tr>
-                    </th:block>
-                </table>
-            </form>
+            <th:block class="searchResult" th:each="product : ${searchResults}">
+                <tr>
+                    <td th:text="${product.name}"></td> 
+                    <td th:text="${product.price}"></td> 
+                <form action="#" th:action="@{/accountPage}" th:object="${orderLineBean}" method="post">
+                    <input type="hidden" th:value="${product.id}" name="productId"/>
+                    <td> <input type="number" value="0"name="nrOfProducts"/></td>
+                    <td><input class="button" type="submit" value="Add To Cart" /></td>
+                </form>
+                </tr>
+            </th:block>
+        </table>
 
-        </div>    
+
+    </div>    
 </body>
 </html>
