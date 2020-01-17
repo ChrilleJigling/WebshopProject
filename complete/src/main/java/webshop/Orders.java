@@ -29,6 +29,9 @@ public class Orders implements Serializable {
     @Column(name = "account_id")
     private int accountId;
     
+    @Column(name = "sent")
+    private String sent;
+    
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy="orderNumber")
     private List<OrderLine> orderLines;
     
@@ -44,7 +47,15 @@ public class Orders implements Serializable {
         super();
         this.accountId = accountsId;
     }
-    
+
+    public String getSent() {
+        return sent;
+    }
+
+    public void setSent(String sent) {
+        this.sent = sent;
+    }
+     
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
