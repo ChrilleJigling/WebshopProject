@@ -10,17 +10,17 @@
     <body>
         <div class="headerText">ArCh Webshop</div>
         <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
-        
             <table id="productsTable">
                 <tr>
                     <th>Order Number</th>
                     <th>Account ID</th>
-                    <th>Mark as Sent</th>
+                    <th>Sent</th>
+                   
                 </tr>
                 <tr th:each="order : ${orders}">
                     <td th:text="${order.orderNumber}"></td>
                     <td th:text="${order.AccountId}"></td>  
-                    <td <input type="checkbox" name="" value="checked" </td>  
+                    <td <input type="checkbox" name="vehicle" value="Bike"/>wwwewfwf </td>
                 </tr>
             </table>
     </body>
