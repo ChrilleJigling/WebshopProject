@@ -1,5 +1,6 @@
 package webshop;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,10 +126,16 @@ public class WebshopService {
     
     public List getShoppingCart() {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
-        String order = String.valueOf(orderList.get(0));
-        logger.info(order);
+        int listSize = orderList.size();
+        String size = String.valueOf(listSize);
+        logger.info(size);
         logger.info("SHOPPINGCART");
-        return orderList;
+        List<OrderLine> orderLineList = new ArrayList();
+        for (Orders orders : orderList) {
+            orderLineList = orderLineRepository.findByOrderNumber(orders.getOrderNumber());
+            logger.info(String.valueOf(orderLineList.get(0)));
+        }
+        return orderLineList;
     }
     
     public List getOrdersByAccount() {
