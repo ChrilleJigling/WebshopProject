@@ -83,9 +83,9 @@ public class WebshopService {
             ordersRepository.save(order);
         }
         for (Orders orders : orderList) {
-            if(orderList.size() >= 1 && orders.getSent() == "YES") {
-                Orders order = new Orders(account.getId());
-                ordersRepository.save(order);
+            if(orderList.size() > 0 && orders.getSent() == "YES") {
+                Orders order2 = new Orders(account.getId());
+                ordersRepository.save(order2);
             } 
         }
     }
@@ -121,6 +121,14 @@ public class WebshopService {
 
     public List getOrders() {
         return ordersRepository.findAll();
+    }
+    
+    public List getShoppingCart() {
+        List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
+        String order = String.valueOf(orderList.get(0));
+        logger.info(order);
+        logger.info("SHOPPINGCART");
+        return orderList;
     }
     
     public List getOrdersByAccount() {
