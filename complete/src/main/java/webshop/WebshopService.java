@@ -12,7 +12,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class WebshopService {
 
     Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
-    
+
     @Autowired
     AccountRepository accountRepository;
     @Autowired
@@ -25,7 +25,7 @@ public class WebshopService {
     static boolean isLoggedIn;
     static boolean isAdmin;
     static Account account;
-    
+
     public boolean login(String accountName, String password) {
         isLoggedIn = false;
         isAdmin = false;
@@ -39,7 +39,7 @@ public class WebshopService {
                     isAdmin = true;
                 } else {
                     isLoggedIn = true;
-                } 
+                }
             }
         }
         return isLoggedIn;
@@ -71,8 +71,8 @@ public class WebshopService {
         Account account = new Account(username, password);
         accountRepository.save(account);
     }
-    
-     public List getProductList(String category) {
+
+    public List getProductList(String category) {
         return productRepository.findByCategory(category);
     }
      
@@ -97,28 +97,28 @@ public class WebshopService {
         OrderLine orderLine = new OrderLine(order.getOrderNumber(), productId, account.getId(), nrOfProducts);
         orderLineRepository.save(orderLine);
     }
-    
+
     public List getOrderLineList(int orderNumber) {
         return orderLineRepository.findByOrderNumber(orderNumber);
     }
-    
+
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
     }
-    
-    public void addProduct(String name, double price, String category){
+
+    public void addProduct(String name, double price, String category) {
         Product product = new Product(name, price, category);
         productRepository.save(product);
     }
-    
+
     public List getOrdersByOrderNumber() {
         return ordersRepository.findByAccountId(account.getId());
     }
-    
+
     public List getOrders() {
         return ordersRepository.findAll();
     }
-    
+
     public void markOrderAsSent(int orderNumber) {
         logger.info("SERVICE");
         logger.info(String.valueOf(orderNumber));
@@ -126,5 +126,5 @@ public class WebshopService {
         Orders order = orders.get(0);
         order.setSent("YES");
         ordersRepository.save(order);
-    } 
+    }
 }
