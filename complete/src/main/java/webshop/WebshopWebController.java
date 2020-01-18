@@ -73,6 +73,14 @@ public class WebshopWebController {
         webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
         return "redirect:/accountPage";
     }
+    
+    @PostMapping("/shoppingCart")
+    public String linkToShoppingCart(@ModelAttribute OrdersBean orderBean, Model model) {
+        int test = orderBean.getOrderNumber();
+        logger.info(String.valueOf(test));
+        model.addAttribute("shoppingCart", webshopService.getOrderLineList(orderBean.getOrderNumber()));
+        return "/shoppingCart";
+    }
 
     // ----- ADMIN ----- //
     @GetMapping("/addProduct")
@@ -86,7 +94,6 @@ public class WebshopWebController {
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
-
         webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
         return "adminAccountPage";
     }
@@ -101,6 +108,8 @@ public class WebshopWebController {
         }
     }
 
+    // ----- ORDERS / ORDERLINE ----- //
+    
     @PostMapping("/markAsSent")
     public String orders(@ModelAttribute OrdersBean orderBean, Model model) {
         webshopService.markOrderAsSent(orderBean.getOrderNumber());
@@ -113,22 +122,18 @@ public class WebshopWebController {
             model.addAttribute("orders", webshopService.getOrders());
             model.addAttribute("message", webshopService.account.getUsername());
             return "/orders";
-        } else {
-            return "redirect:/login";
-        }
+        } else if(!webshopService.isAdmin) {
+            model.addAttribute("orders", webshopService.getOrdersByAccount());
+            model.addAttribute("message", webshopService.account.getUsername());
+            return "/orders";
+        } 
+            return "redirect:/login";  
     }
-
-    // ----- ORDERS ----- //
+    
     @PostMapping("/orderDetails")
     public String linkToOrderDetails(@ModelAttribute OrdersBean orderBean, Model model) {
-        if (webshopService.isAdmin) {
-            List<OrderLine> test = webshopService.getOrderLineList(orderBean.getOrderNumber());
-            logger.info(String.valueOf(test.get(0)));
             model.addAttribute("orderLines", webshopService.getOrderLineList(orderBean.getOrderNumber()));
             return "/orderDetails";
-        } else {
-            return "/orderDetails";
-        }
     }
 
     /* @GetMapping("/orderDetails")
@@ -141,6 +146,7 @@ public class WebshopWebController {
             return "redirect:/orderDetails";
         }
     }*/
+    
     // ----- REGISTER ----- //
     @GetMapping("/register")
     public String register(Model model) {

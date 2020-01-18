@@ -18,12 +18,12 @@
                     <th>Account ID</th>
                     <th>Quantity</th>
                 </tr>
-                <th:block class="" th:each="orderLine : ${orderLines}">
+                <th:block class="" th:each="cart : ${shoppingCart}">
                 <tr>           
-                    <td th:text="${orderLine.orderNumber}"</td>
-                    <td th:text="${orderLine.productId}"</td> 
-                    <td th:text="${orderLine.accountId}"></td> 
-                    <td th:text="${orderLine.nrOfProducts}"></td>  
+                    <td th:text="${cart.orderNumber}"</td>
+                    <td th:text="${cart.productId}"</td> 
+                    <td th:text="${cart.accountId}"></td> 
+                    <td th:text="${cart.nrOfProducts}"></td>  
                 </tr>
                 </th:block>
             </table>

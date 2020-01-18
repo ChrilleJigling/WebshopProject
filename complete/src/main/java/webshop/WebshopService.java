@@ -101,6 +101,10 @@ public class WebshopService {
     public List getOrderLineList(int orderNumber) {
         return orderLineRepository.findByOrderNumber(orderNumber);
     }
+    
+    public List getOrderLineListByAccountId() {
+        return orderLineRepository.findByAccountId(account.getId());
+    }
 
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
@@ -118,10 +122,12 @@ public class WebshopService {
     public List getOrders() {
         return ordersRepository.findAll();
     }
+    
+    public List getOrdersByAccount() {
+        return ordersRepository.findByAccountId(account.getId());
+    }
 
     public void markOrderAsSent(int orderNumber) {
-        logger.info("SERVICE");
-        logger.info(String.valueOf(orderNumber));
         List<Orders> orders = ordersRepository.findByOrderNumber(orderNumber);
         Orders order = orders.get(0);
         order.setSent("YES");

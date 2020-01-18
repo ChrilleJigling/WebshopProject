@@ -20,6 +20,11 @@ and open the template in the editor.
     <a class="button" href="headset">Headset</a>
     <a class="button" href="keyboard">Keyboard</a>
     <a class="button" href="mouse">Mouse</a>
+    <a class="button" href="orders">Orders</a>
+    <form action="#" th:action="@{/shoppingCart}" th:object="${ordersBean}" method="post">
+        <input type="hidden" th:value="${product.id}" name="productId"/>
+    <input class="button" type="submit" value="Shopping Cart" />
+    </form>
 </div>
 <body>
     <div class="centerText">
