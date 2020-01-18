@@ -31,11 +31,11 @@ position:relative;
     bottom:-5px;
 }
 .search{
-    margin-left:11.5%;
 }
 .searchbox{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .box div {
