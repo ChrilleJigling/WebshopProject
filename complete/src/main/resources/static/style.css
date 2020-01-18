@@ -1,14 +1,14 @@
 .headerText {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  border: none;
-  font: normal 76px/1 "aclonica", Helvetica, sans-serif;
-  color: #0096ff;
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  text-shadow: 5px 4px 0 rgba(0,0,0,0.5) ;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 76px/1 "aclonica", Helvetica, sans-serif;
+    color: #0096ff;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    text-shadow: 5px 4px 0 rgba(0,0,0,0.5) ;
 }
 
 .headerDiv {
@@ -17,7 +17,7 @@
 }
 
 .centerFields {
-    
+
 }
 
 .centerText {
@@ -25,16 +25,22 @@
     text-align:center;
     margin-top: 5%;
 }
-
 .box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+position:relative;
+    bottom:-5px;
+}
+.search{
+    margin-left:11.5%;
+}
+.searchbox{
+    display: flex;
+    flex-direction: row;
 }
 
 .box div {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 }
 
 .button {
@@ -69,14 +75,14 @@
 }
 
 #productsTable {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 #productsTable td, #productsTable th {
-  border: 1px solid #ddd;
-  padding: 8px;
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
 #productsTable tr:nth-child(even){background-color: #f2f2f2;}
@@ -84,10 +90,10 @@
 #productsTable tr:hover {background-color: #ddd;}
 
 #productsTable th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #0096ff;
-  color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0096ff;
+    color: white;
 }
 
