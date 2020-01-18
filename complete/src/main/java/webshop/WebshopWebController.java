@@ -1,9 +1,6 @@
 package webshop;
 
 import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WebshopWebController {
@@ -82,12 +75,14 @@ public class WebshopWebController {
      */
     @PostMapping(path = "/accountPage")
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
-            logger.info("-------" + String.valueOf(orderLineBean.getProductId()));
-            logger.info("-------" + String.valueOf(orderLineBean.getNrOfProducts()));
-
+        logger.info("-------" + String.valueOf(orderLineBean.getProductId()));
+        logger.info("-------" + String.valueOf(orderLineBean.getNrOfProducts()));
+        if (webshopService.createOrder()) {
             webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
             return "redirect:/accountPage";
-
+        } else {
+            return "redirect:/login";
+        }
     }
 
     // ----- ADMIN ----- //
@@ -102,7 +97,7 @@ public class WebshopWebController {
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute ProductBean productBean, Model model) {
-        
+
         webshopService.addProduct(productBean.getName(), productBean.getPrice(), productBean.getCategory());
         return "adminAccountPage";
     }
@@ -116,13 +111,13 @@ public class WebshopWebController {
             return "redirect:/login";
         }
     }
-    
+
     @PostMapping("/markAsSent")
     public String orders(@ModelAttribute OrdersBean orderBean, Model model) {
         webshopService.markOrderAsSent(orderBean.getOrderNumber());
         return "redirect:/orders";
     }
-   
+
     /*@GetMapping("/orders")
     public String orders(Model model) {
         model.addAttribute("message", webshopService.account.getUsername());
@@ -132,7 +127,6 @@ public class WebshopWebController {
     public String linkToAddProduct(Model model) {
         return "/addProduct";
     }*/
-    
     @GetMapping("/orders")
     public String linkToOrders(Model model) {
         if (webshopService.isAdmin) {
@@ -143,13 +137,11 @@ public class WebshopWebController {
             return "redirect:/login";
         }
     }
-    
-    
+
     // ----- ORDERS ----- //
-    
     @PostMapping("/orderDetails")
     public String linkToOrderDetails(@ModelAttribute OrdersBean orderBean, Model model) {
-        if(webshopService.isAdmin){
+        if (webshopService.isAdmin) {
             List<OrderLine> test = webshopService.getOrderLineList(orderBean.getOrderNumber());
             logger.info(String.valueOf(test.get(0)));
             model.addAttribute("orderLines", webshopService.getOrderLineList(orderBean.getOrderNumber()));
@@ -158,8 +150,8 @@ public class WebshopWebController {
             return "/orderDetails";
         }
     }
-    
-   /* @GetMapping("/orderDetails")
+
+    /* @GetMapping("/orderDetails")
     public String linkToOrderDetails2(Model model) {
         if(webshopService.isAdmin){
             model.addAttribute("orderLines", webshopService.getOrderLineList(3));
@@ -169,9 +161,7 @@ public class WebshopWebController {
             return "redirect:/orderDetails";
         }
     }*/
-
     // ----- REGISTER ----- //
-
     @GetMapping("/register")
     public String register(Model model) {
         return "register";

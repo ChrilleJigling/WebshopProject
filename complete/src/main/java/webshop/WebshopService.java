@@ -12,7 +12,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class WebshopService {
 
     Logger logger = LoggerFactory.getLogger(WebshopWebController.class);
-    
+
     @Autowired
     AccountRepository accountRepository;
     @Autowired
@@ -25,7 +25,7 @@ public class WebshopService {
     static boolean isLoggedIn;
     static boolean isAdmin;
     static Account account;
-    
+
     public boolean login(String accountName, String password) {
         isLoggedIn = false;
         isAdmin = false;
@@ -39,7 +39,7 @@ public class WebshopService {
                     isAdmin = true;
                 } else {
                     isLoggedIn = true;
-                } 
+                }
             }
         }
         return isLoggedIn;
@@ -71,41 +71,51 @@ public class WebshopService {
         Account account = new Account(username, password);
         accountRepository.save(account);
     }
-    
-     public List getProductList(String category) {
+
+    public List getProductList(String category) {
         return productRepository.findByCategory(category);
     }
-     
+
     public void addToCart(int productId, int nrOfProducts) {
-        int orderNumber = 3;
-        logger.info(String.valueOf("Pid: "+productId));
-        logger.info(String.valueOf("nrOf: "+nrOfProducts));
-        logger.info(String.valueOf("Aid: "+account.getId()));
-        OrderLine orderLine = new OrderLine(orderNumber,account.getId(),productId, nrOfProducts);
-        
+        List<Orders> ordersList = ordersRepository.findByAccountId(account.getId());
+        Orders order = new Orders();
+        order = ordersList.get(0);
+        OrderLine orderLine = new OrderLine(order.getOrderNumber(), account.getId(), productId, nrOfProducts);
+        orderLineRepository.save(orderLine);
     }
-    
+
     public List getOrderLineList(int orderNumber) {
         return orderLineRepository.findByOrderNumber(orderNumber);
     }
-    
+
     public List getProductListById(int productId) {
         return productRepository.findById(productId);
     }
-    
-    public void addProduct(String name, double price, String category){
+
+    public void addProduct(String name, double price, String category) {
         Product product = new Product(name, price, category);
         productRepository.save(product);
     }
-    
+
     public List getOrdersByOrderNumber() {
         return ordersRepository.findByAccountId(account.getId());
     }
-    
+
     public List getOrders() {
         return ordersRepository.findAll();
     }
-    
+
+    public boolean createOrder() {
+        List<Orders> orderList = ordersRepository.findByAccountId(account.getId());
+        if (orderList.size() >= 1) {
+            Orders order = new Orders(account.getId());
+            ordersRepository.save(order);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void markOrderAsSent(int orderNumber) {
         logger.info("SERVICE");
         logger.info(String.valueOf(orderNumber));
@@ -114,6 +124,4 @@ public class WebshopService {
         order.setSent("YES");
         ordersRepository.save(order);
     }
-    
-    
 }
