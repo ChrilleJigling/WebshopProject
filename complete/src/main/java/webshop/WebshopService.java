@@ -78,8 +78,11 @@ public class WebshopService {
      
     public void addToCart(int productId, int nrOfProducts) {
         int orderNumber = 3;
+        logger.info(String.valueOf("Pid: "+productId));
+        logger.info(String.valueOf("nrOf: "+nrOfProducts));
+        logger.info(String.valueOf("Aid: "+account.getId()));
         OrderLine orderLine = new OrderLine(orderNumber,account.getId(),productId, nrOfProducts);
-        orderLineRepository.save(orderLine);
+        
     }
     
     public List getOrderLineList(int orderNumber) {

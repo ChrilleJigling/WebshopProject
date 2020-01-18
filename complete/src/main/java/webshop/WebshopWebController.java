@@ -85,7 +85,7 @@ public class WebshopWebController {
             logger.info("-------" + String.valueOf(orderLineBean.getProductId()));
             logger.info("-------" + String.valueOf(orderLineBean.getNrOfProducts()));
 
-            webshopService.addToCart(orderLineBean.getNrOfProducts(), orderLineBean.getNrOfProducts());
+            webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
             return "redirect:/accountPage";
 
     }
