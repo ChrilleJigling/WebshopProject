@@ -9,34 +9,36 @@ and open the template in the editor.
         <title>ArCh Webshop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+        <link rel = "stylesheet" type = "text/css" href = "style.css?version=2" />
     <div class="headerText">ArCh Webshop</div>
     <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
 </head>
-<div class="box">
-    <a class="button" href="pc">PC</a>
-    <a class="button" href="laptop">Laptop</a>
-    <a class="button" href="monitor">Monitor</a>
-    <a class="button" href="headset">Headset</a>
-    <a class="button" href="keyboard">Keyboard</a>
-    <a class="button" href="mouse">Mouse</a>
-    <a class="button" href="orders">Orders</a>
-    <form action="#" th:action="@{/shoppingCart}" th:object="${ordersBean}" method="post">
-        <input type="hidden" th:value="${product.id}" name="productId"/>
-    <input class="button" type="submit" value="Shopping Cart" />
-    </form>
-</div>
+
 <body>
     <div class="centerText">
         <h3>Account Details:</h3>
         <pre th:text="${message}">text</pre>   
     </div>
 
-    <form action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
-        <input type="text" th:field="*{keyword}" />
-        <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
-    </form>
+    <div class="searchbox">
+        <div class="box">
+            <a class="button" href="pc">PC</a>
+            <a class="button" href="laptop">Laptop</a>
+            <a class="button" href="monitor">Monitor</a>
+            <a class="button" href="headset">Headset</a>
+            <a class="button" href="keyboard">Keyboard</a>
+            <a class="button" href="mouse">Mouse</a>
+            <form action="#" th:action="@{/shoppingCart}" th:object="${ordersBean}" method="post">
+            <input type="hidden" th:value="${product.id}" name="productId"/>
+            <input class="button" type="submit" value="Shopping Cart" />
+            </form>
+        </div>
+        <form class="search" action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
+            <input type="text" th:field="*{keyword}" />
+            <input class="button" type="submit" value="Search" /> <input class="button" type="reset" value="Clear" /> 
+        </form>
 
+    </div>
     <div class="centerFields">
         <pre th:text="${errorMessage}"></pre>  
         <table id="productsTable">
