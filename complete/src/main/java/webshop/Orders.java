@@ -30,7 +30,7 @@ public class Orders implements Serializable {
     private int accountId;
     
     @Column(name = "sent")
-    private String sent;
+    private String sent = "NO";
     
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy="orderNumber")
     private List<OrderLine> orderLines;
@@ -43,10 +43,9 @@ public class Orders implements Serializable {
         super();
     }
 
-     public Orders(int accountsId, String sent) {
+     public Orders(int accountsId) {
         super();
         this.accountId = accountsId;
-        this.sent = sent;
     }
 
     public String getSent() {

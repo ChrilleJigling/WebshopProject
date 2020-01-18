@@ -77,8 +77,10 @@ public class WebshopService {
     }
      
     public void addToCart(int productId, int nrOfProducts) {
-        int orderNumber = 3;
-        OrderLine orderLine = new OrderLine(orderNumber,account.getId(),productId, nrOfProducts);
+        List<Orders> ordersList = ordersRepository.findByAccountId(account.getId());
+        Orders order = new Orders();
+        order = ordersList.get(0);
+        OrderLine orderLine = new OrderLine(order.getOrderNumber(),account.getId(),productId, nrOfProducts);
         orderLineRepository.save(orderLine);
     }
     
@@ -103,6 +105,17 @@ public class WebshopService {
         return ordersRepository.findAll();
     }
     
+    public boolean createOrder() {
+        List<Orders> orderList = ordersRepository.findByAccountId(account.getId());
+        if (orderList.size() >= 1) {
+            Orders order = new Orders(account.getId());
+            ordersRepository.save(order);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public void markOrderAsSent(int orderNumber) {
         logger.info("SERVICE");
         logger.info(String.valueOf(orderNumber));
@@ -110,7 +123,5 @@ public class WebshopService {
         Orders order = orders.get(0);
         order.setSent("YES");
         ordersRepository.save(order);
-    }
-    
-    
+    } 
 }
