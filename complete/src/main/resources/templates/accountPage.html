@@ -28,10 +28,7 @@ and open the template in the editor.
             <a class="button" href="headset">Headset</a>
             <a class="button" href="keyboard">Keyboard</a>
             <a class="button" href="mouse">Mouse</a>
-            <form action="#" th:action="@{/shoppingCart}" th:object="${ordersBean}" method="post">
-            <input type="hidden" th:value="${product.id}" name="productId"/>
-            <input class="button" type="submit" value="Shopping Cart" />
-            </form>
+            <a class="button" href="shoppingCart">Shopping Cart</a>
         </div>
         <form class="search" action="#" th:action="@{/accountPage}" th:object="${searchFormBean}" method="post">
             <input type="text" th:field="*{keyword}" />
