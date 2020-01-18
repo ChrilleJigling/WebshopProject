@@ -78,14 +78,11 @@ public class WebshopWebController {
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
             logger.info("-------" + String.valueOf(orderLineBean.getProductId()));
             logger.info("-------" + String.valueOf(orderLineBean.getNrOfProducts()));
-            if (webshopService.createOrder()) {
-                webshopService.addToCart(orderLineBean.getNrOfProducts(), orderLineBean.getNrOfProducts());
-                return "redirect:/accountPage";
-            } else {
-                return "redirect:/login";
-            }
-            
+            webshopService.createOrder();
+            webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
+            return "redirect:/accountPage";
     }
+
 
     // ----- ADMIN ----- //
     @GetMapping("/addProduct")

@@ -19,7 +19,6 @@ import javax.persistence.Table;
 public class OrderLine implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_number")
     private int orderNumber;
 
@@ -45,7 +44,7 @@ public class OrderLine implements Serializable {
     public OrderLine() {
     }
 
-    public OrderLine(int orderNumber, int accountId, int productId, int nrOfProducts) {
+    public OrderLine(int orderNumber, int productId, int accountId, int nrOfProducts) {
         this.productId = productId;
         this.accountId= accountId;
         this.nrOfProducts = nrOfProducts;

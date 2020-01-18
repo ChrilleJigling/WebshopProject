@@ -23,6 +23,18 @@ public class OrderLineId implements Serializable {
         this.accountId = accountId;
     }
 
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
     public int getOrderNumber() {
         return orderNumber;
     }

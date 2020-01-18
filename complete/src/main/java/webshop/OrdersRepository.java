@@ -10,6 +10,4 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     public List<Orders> findByAccountId(int accountId);
     
     public List<Orders> findBySent(String sent);
-    
-    
 }
