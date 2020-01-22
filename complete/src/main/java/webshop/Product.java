@@ -23,9 +23,10 @@ public class Product implements Serializable {
     private double price;
     private String category;
 
-    @OneToMany(mappedBy = "productId")
+    /*  @OneToMany(mappedBy = "productId")
+     
     private List<OrderLine> orderLinesList;
-
+     */
     public Product() {
         super();
     }
@@ -52,13 +53,13 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public List<OrderLine> getOrderLinesList() {
+    /*public List<OrderLine> getOrderLinesList() {
         return orderLinesList;
     }
 
     public void setOrderLinesList(List<OrderLine> orderLinesList) {
         this.orderLinesList = orderLinesList;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -86,14 +87,14 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public List<OrderLine> getOrderlinesList() {
+    /*public List<OrderLine> getOrderlinesList() {
         return orderLinesList;
     }
 
     public void setOrderlinesList(List<OrderLine> orderlinesList) {
         this.orderLinesList = orderlinesList;
     }
-
+     */
     @Override
     public String toString() {
         return name + " " + price + ":-\n";

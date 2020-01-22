@@ -1,4 +1,3 @@
-
 package webshop;
 
 import java.io.Serializable;
@@ -10,10 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @IdClass(OrderLineId.class)
-@Table(name="orderline")
+@Table(name = "orderline")
 public class OrderLine implements Serializable {
 
     @Id
@@ -23,31 +21,32 @@ public class OrderLine implements Serializable {
     @Id
     @Column(name = "product_id")
     private int productId;
-    
+
     @Column(name = "number_of_products")
     private int nrOfProducts;
-    
+
     @Id
     @Column(name = "account_id")
     private int accountId;
-
+/*
     @ManyToOne
-    @JoinColumn(name = "order_number", insertable=false, updatable=false)
+    @JoinColumn(name = "order_number", insertable = false, updatable = false)
     private Orders orders;
-    
+*/
     @ManyToOne
-    @JoinColumn(name = "product_id", insertable=false, updatable=false)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
-    
+
     public OrderLine() {
     }
 
     public OrderLine(int orderNumber, int productId, int accountId, int nrOfProducts) {
         this.productId = productId;
-        this.accountId= accountId;
+        this.accountId = accountId;
         this.nrOfProducts = nrOfProducts;
         this.orderNumber = orderNumber;
     }
+
     public int getNrOfProducts() {
         return nrOfProducts;
     }
@@ -72,6 +71,7 @@ public class OrderLine implements Serializable {
         this.nrOfProducts = nrOfProducts;
     }
 
+    /* 
     public Orders getOrders() {
         return orders;
     }
@@ -79,7 +79,7 @@ public class OrderLine implements Serializable {
     public void setOrders(Orders orders) {
         this.orders = orders;
     }
-
+     */
     public Product getProduct() {
         return product;
     }
@@ -87,7 +87,7 @@ public class OrderLine implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
+
     public int getOrderNumber() {
         return orderNumber;
     }

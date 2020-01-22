@@ -76,7 +76,7 @@ public class WebshopService {
     public List getProductList(String category) {
         return productRepository.findByCategory(category);
     }
-     
+
     public void createOrder() {
         List<Orders> orderList = ordersRepository.findByAccountId(account.getId());
         if (orderList.isEmpty()) {
@@ -84,13 +84,13 @@ public class WebshopService {
             ordersRepository.save(order);
         }
         for (Orders orders : orderList) {
-            if(orderList.size() > 0 && orders.getSent() == "YES") {
+            if (orderList.size() > 0 && orders.getSent() == "YES") {
                 Orders order2 = new Orders(account.getId());
                 ordersRepository.save(order2);
-            } 
+            }
         }
     }
-     
+
     public void addToCart(int productId, int nrOfProducts) {
         List<Orders> ordersList = ordersRepository.findByAccountId(account.getId());
         Orders order = new Orders();
@@ -102,7 +102,7 @@ public class WebshopService {
     public List getOrderLineList(int orderNumber) {
         return orderLineRepository.findByOrderNumber(orderNumber);
     }
-    
+
     public List getOrderLineListByAccountId() {
         return orderLineRepository.findByAccountId(account.getId());
     }
@@ -123,7 +123,7 @@ public class WebshopService {
     public List getOrders() {
         return ordersRepository.findAll();
     }
-    
+
     public List getShoppingCart() {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
         int listSize = orderList.size();
@@ -137,7 +137,7 @@ public class WebshopService {
         }
         return orderLineList;
     }
-    
+
     public List getOrdersByAccount() {
         return ordersRepository.findByAccountId(account.getId());
     }
@@ -147,5 +147,17 @@ public class WebshopService {
         Orders order = orders.get(0);
         order.setSent("YES");
         ordersRepository.save(order);
+    }
+
+    public List getUnsentOrders() {
+        List<Orders> allOrders = ordersRepository.findAll();
+        List<Orders> unsentOrders = new ArrayList<>();
+        for (Orders order : allOrders) {
+            logger.info("for");
+            if (order.getSent().equals("NO")) {
+                unsentOrders.add(order);
+            }
+        }
+        return unsentOrders;
     }
 }

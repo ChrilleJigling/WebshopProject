@@ -25,8 +25,8 @@ public class Account implements Serializable {
     @Column(name = "is_admin")
     private int isAdmin;
     
-    @OneToMany(mappedBy="accountId")
-    List<Orders> orderList;
+    /*@OneToMany(mappedBy="accountId")
+    List<Orders> orderList;*/
 
     public Account() {
         super();
@@ -38,13 +38,13 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public List<Orders> getOrderList() {
+   /* public List<Orders> getOrderList() {
         return orderList;
     }
 
     public void setOrderList(List<Orders> orderList) {
         this.orderList = orderList;
-    }
+    }*/
     
     public int getIsAdmin() {
         return isAdmin;
