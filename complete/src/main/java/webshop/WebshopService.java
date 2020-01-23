@@ -141,7 +141,12 @@ public class WebshopService {
     public List getOrdersByAccount() {
         return ordersRepository.findByAccountId(account.getId());
     }
-
+public String error(){
+    if(isLoggedIn) {
+        return "You need admin privilages for that!";
+    }
+    return "Make sure you're logged in";
+}
     public void markOrderAsSent(int orderNumber) {
         List<Orders> orders = ordersRepository.findByOrderNumber(orderNumber);
         Orders order = orders.get(0);
@@ -153,11 +158,20 @@ public class WebshopService {
         List<Orders> allOrders = ordersRepository.findAll();
         List<Orders> unsentOrders = new ArrayList<>();
         for (Orders order : allOrders) {
-            logger.info("for");
             if (order.getSent().equals("NO")) {
                 unsentOrders.add(order);
             }
         }
         return unsentOrders;
+    }
+        public List getSentOrders() {
+        List<Orders> allOrders = ordersRepository.findAll();
+        List<Orders> sentOrders = new ArrayList<>();
+        for (Orders order : allOrders) {
+            if (order.getSent().equals("YES")) {
+                sentOrders.add(order);
+            }
+        }
+        return sentOrders;
     }
 }

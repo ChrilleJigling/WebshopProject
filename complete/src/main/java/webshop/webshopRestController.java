@@ -61,6 +61,15 @@ public class webshopRestController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("blö!");
         }
     }
+    @GetMapping("/arch/rest/sentOrders")
+    public ResponseEntity showSentOrders() {
+        if (webshopService.isLoggedIn && webshopService.isAdmin) {
+            List unsentOrders = webshopService.getUnsentOrders();
+            return ResponseEntity.accepted().body(unsentOrders);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("blö!");
+        }
+    }
     /* @GetMapping("/arch/rest/addProduct/{name}/{price}/{category}")
     public ResponseEntity<String> markOrderAsSent(@PathVariable("name") String name, @PathVariable("price") int price, @PathVariable("category")String category) {
         if (webshopService.isLoggedIn && webshopService.isAdmin) {
