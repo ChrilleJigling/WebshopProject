@@ -71,14 +71,14 @@ public class WebshopWebController {
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.createOrder();
         webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
-        return "/order";
+        return "redirect:/accountPage";
     }
     
     @GetMapping("/shoppingCart")
     public String linkToShoppingCart(Model model) {
         List shopCart = webshopService.getShoppingCart();
         model.addAttribute("shopCart", shopCart);
-        model.addAttribute("", webshopService.getTotalPrice(shopCart));
+        model.addAttribute("totalPrice", webshopService.getTotalPrice());
         return "/shoppingCart";
     }
 
@@ -144,7 +144,9 @@ public class WebshopWebController {
     
     @PostMapping("/updateQuantity")
     public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
-        webshopService.updateOrderLine(orderLine.productId);
+        webshopService.updateOrderLine(orderLine.productId,orderLine.nrOfProducts);
+        String test = String.valueOf(orderLine.productId);
+        logger.info(test);
         return "redirect:/shoppingCart";
     }
 

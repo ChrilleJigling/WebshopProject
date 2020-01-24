@@ -10,38 +10,35 @@
     <body>
         <div class="headerText">ArCh Webshop</div>
         <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
-        
-            <table id="productsTable">
-                <tr>
-                    <th>Order Number</th>
-                    <th>Product ID</th>
-                    <th>Account ID</th>
-                    <th>Quantity</th>
-                </tr>
-                <th:block class="" th:each="cart : ${shopCart}">
+
+        <table id="productsTable">
+            <tr>
+                <th>Order Number</th>
+                <th>Product ID</th>
+                <th>Account ID</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+            <th:block class="" th:each="cart : ${shopCart}">
                 <tr>           
-<<<<<<< HEAD
-                    <td th:text="${cart.productId}"</td> 
-                    <td th:text="${cart.nrOfProducts}"></td>  
-=======
-                    <td th:text="${cart.orderNumber}"</td>
                 <form action="#" th:action="@{/updateQuantity}" th:object="${orderLineBean}" method="post">
                     <input type="hidden" th:value="${cart.productId}" name="productId"/>
-                   <td th:text="${cart.orderNumber}"</td>
+                    <td th:text="${cart.orderNumber}"</td>
                     <td th:text="${cart.productId}"</td> 
                     <td th:text="${cart.accountId}"></td>
-                    <td><input class="number" type="number" th:value="${cart.nrOfProducts}"/>
-                    <input class="button" type="submit" value="Update"/>
+                    <td><input class="number" type="number" name="nrOfProducts"th:value="${cart.nrOfProducts}"/>
+                        <input class="button" type="submit" value="Update"/>
                     </td>
                 </form>
                 <form action="#" th:action="@{/delete}" th:object="${orderLineBean}" method="post">
                     <input type="hidden" th:value="${cart.productId}" name="productId"/>
                     <td><input class="button" type="submit" value="Remove" /></td>
                 </form>
->>>>>>> ce242da06b97b4668296a32d319cf70ed8d7a136
                 </tr>
-                </th:block>
-            </table>
-        
+            </th:block>
+
+        </table>
+        <p >Total Price: </p>
+        <p th:text="${totalPrice}" > </p>
     </body>
 </html>
