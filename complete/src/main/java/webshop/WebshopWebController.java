@@ -77,7 +77,10 @@ public class WebshopWebController {
     @GetMapping("/shoppingCart")
     public String linkToShoppingCart(Model model) {
         logger.info("CONTROLLER");
-        model.addAttribute("shopCart", webshopService.getShoppingCart());
+        List shopCart = webshopService.getShoppingCart();
+        logger.info("Controller");
+        model.addAttribute("shopCart", shopCart);
+        logger.info("added attr");
         return "/shoppingCart";
     }
 
