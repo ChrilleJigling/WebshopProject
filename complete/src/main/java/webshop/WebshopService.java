@@ -204,5 +204,9 @@ public class WebshopService {
         order.setOrdered("YES");
         ordersRepository.save(order);
     }
+    
+    public List getOrderConfirmation()  {
+        return orderLineRepository.findByAccountId(account.getId());   
+    }
 
 }

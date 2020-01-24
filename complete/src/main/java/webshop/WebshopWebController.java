@@ -151,8 +151,14 @@ public class WebshopWebController {
     @PostMapping("/makeOrder")
     public String makeOrder (@ModelAttribute OrderLineBean orderLine, Model model) {
         webshopService.updateOrdered(orderLine.getOrderNumber());
-        webshopService.
         return "redirect:/orderConfirmation";
+    }
+    
+    @GetMapping("/orderConfirmation")
+    public String orderConfirmation(Model model) {
+        model.addAttribute("orderConfirmation", webshopService.getOrderConfirmation());
+        model.addAttribute("totalPrice", webshopService.getTotalPrice());
+        return "/orderConfirmation";
     }
 
     /* @GetMapping("/orderDetails")

@@ -15,4 +15,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     
     @Query("SELECT o FROM Orders o WHERE o.accountId = :accountId AND o.sent = :sent")
     public List<Orders> findByAccountIdAndSent(@Param("accountId") int accountId, @Param("sent") String sent);
+    
+    @Query("SELECT o FROM Orders o WHERE o.accountId = :accountId AND o.ordered = :ordered")
+    public List<Orders> findByAccountIdAndOrdered(@Param("accountId") int accountId, @Param("ordered") String ordered);
 }

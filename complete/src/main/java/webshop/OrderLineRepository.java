@@ -12,4 +12,5 @@ public interface OrderLineRepository extends JpaRepository<OrderLine, Integer>{
     public List<OrderLine> findByProductId(int productId);
     
     public List<OrderLine> findByOrderNumber(int orderNumber);
+    
 }

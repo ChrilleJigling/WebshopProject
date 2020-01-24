@@ -6,6 +6,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <table id="productsTable">
+            <tr>
+                <th>Order Number</th>
+                <th>Product ID</th>
+                <th>Account ID</th>
+                <th>Quantity</th>
+            </tr>
+        <th:block class="" th:each="order : ${orderConfirmation}">
+                <tr>           
+                    <td th:text="${order.orderNumber}"</td>
+                    <td th:text="${order.productId}"</td> 
+                    <td th:text="${order.cart.accountId}"></td>
+                    <td th:text="${order.nrOfProducts}"></td>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <p >Total Price: </p>
+        <p th:text="${totalPrice}" > </p>
     </body>
 </html>
