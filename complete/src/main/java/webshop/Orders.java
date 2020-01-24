@@ -39,10 +39,21 @@ public class Orders implements Serializable {
     @JoinColumn(name = "account_id", insertable=false, updatable=false)
     private Account account;
     
+    @Column(name = "ordered")
+    private String ordered;
+    
     public Orders() {
         super();
     }
 
+    public String getOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(String ordered) {
+        this.ordered = ordered;
+    }
+    
      public Orders(int accountsId) {
         super();
         this.accountId = accountsId;

@@ -132,8 +132,8 @@ public class WebshopWebController {
     
     @PostMapping("/orderDetails")
     public String linkToOrderDetails(@ModelAttribute OrdersBean orderBean, Model model) {
-            model.addAttribute("orderLines", webshopService.getOrderLineList(orderBean.getOrderNumber()));
-            return "/orderDetails";
+        model.addAttribute("orderLines", webshopService.getOrderLineList(orderBean.getOrderNumber()));
+        return "/orderDetails";
     }
     
     @PostMapping("/delete")
@@ -146,6 +146,12 @@ public class WebshopWebController {
     public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
         webshopService.updateOrderLine(orderLine.productId,orderLine.nrOfProducts);
         return "redirect:/shoppingCart";
+    }
+    
+    @PostMapping("/makeOrder")
+    public String makeOrder (@ModelAttribute OrderLineBean orderLine, Model model) {
+        webshopService.updateOrdered(orderLine.getOrderNumber());
+        return "redirect:/accountPage";
     }
 
     /* @GetMapping("/orderDetails")

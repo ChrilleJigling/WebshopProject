@@ -40,5 +40,9 @@
         </table>
         <p >Total Price: </p>
         <p th:text="${totalPrice}" > </p>
+        <form action="#" th:action="@{/makeOrder}" th:object="${orderLineBean}" method="post">
+                <input type="hidden" th:value="${cart.orderNumber}" name="orderNumber"/>
+                <td><input class="button" type="submit" value="Place Order" /></td>
+        </form>
     </body>
 </html>
