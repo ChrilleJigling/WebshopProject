@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+@Service
 @SessionScope
 public class WebshopService {
 
@@ -172,5 +173,17 @@ public String error(){
             }
         }
         return sentOrders;
+    }
+        
+    public void deleteOrderLine(int productId) {
+        List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
+        OrderLine newOrderLine = orderLineList.get(0);
+        orderLineRepository.delete(newOrderLine);
+    }
+    
+    public void updateOrderLine(int productId) {
+        List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
+        OrderLine newOrderLine = orderLineList.get(0);
+        orderLineRepository.save(newOrderLine);
     }
 }

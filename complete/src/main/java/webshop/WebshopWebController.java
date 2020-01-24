@@ -134,6 +134,18 @@ public class WebshopWebController {
             model.addAttribute("orderLines", webshopService.getOrderLineList(orderBean.getOrderNumber()));
             return "/orderDetails";
     }
+    
+    @PostMapping("/delete")
+    public String deleteOrderLine(@ModelAttribute OrderLineBean orderLine, Model model) {
+        webshopService.deleteOrderLine(orderLine.productId);
+        return "/shoppingCart";
+    }
+    
+    @PostMapping("/updateQuantity")
+    public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
+        webshopService.updateOrderLine(orderLine.productId);
+        return "/shoppingCart";
+    }
 
     /* @GetMapping("/orderDetails")
     public String linkToOrderDetails2(Model model) {
