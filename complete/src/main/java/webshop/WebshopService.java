@@ -127,8 +127,6 @@ public class WebshopService {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
         int listSize = orderList.size();
         String size = String.valueOf(listSize);
-        logger.info(size);
-        logger.info("SHOPPINGCART");
         List<OrderLine> orderLineList = new ArrayList();
         for (Orders orders : orderList) {
             orderLineList.addAll(orderLineRepository.findByOrderNumber(orders.getOrderNumber()));
@@ -179,9 +177,19 @@ public String error(){
         orderLineRepository.delete(newOrderLine);
     }
     
-    public void updateOrderLine(int productId) {
+    public void updateOrderLine(int productId, int nrOfProducts) {
         List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
         OrderLine newOrderLine = orderLineList.get(0);
+        newOrderLine.setNrOfProducts(nrOfProducts);
         orderLineRepository.save(newOrderLine);
+    }
+    
+    public double getTotalPrice() {
+        List<OrderLine> orderLineList = orderLineRepository.findByAccountId(account.getId());
+        double totalPrice = 0;
+        for (OrderLine orderLine : orderLineList) {
+            totalPrice += orderLine.getProduct().getPrice();
+        }
+        return totalPrice;
     }
 }

@@ -78,7 +78,7 @@ public class WebshopWebController {
     public String linkToShoppingCart(Model model) {
         List shopCart = webshopService.getShoppingCart();
         model.addAttribute("shopCart", shopCart);
-        model.addAttribute("", webshopService.getTotalPrice(shopCart));
+        model.addAttribute("totalPrice", webshopService.getTotalPrice());
         return "/shoppingCart";
     }
 
@@ -144,7 +144,7 @@ public class WebshopWebController {
     
     @PostMapping("/updateQuantity")
     public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
-        webshopService.updateOrderLine(orderLine.productId);
+        webshopService.updateOrderLine(orderLine.productId, orderLine.nrOfProducts);
         return "redirect:/shoppingCart";
     }
 
