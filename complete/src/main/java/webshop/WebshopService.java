@@ -123,7 +123,6 @@ public class WebshopService {
     public List getOrders() {
         return ordersRepository.findAll();
     }
-
     public List getShoppingCart() {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
         int listSize = orderList.size();

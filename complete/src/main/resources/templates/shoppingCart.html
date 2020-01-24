@@ -20,6 +20,10 @@
                 </tr>
                 <th:block class="" th:each="cart : ${shopCart}">
                 <tr>           
+<<<<<<< HEAD
+                    <td th:text="${cart.productId}"</td> 
+                    <td th:text="${cart.nrOfProducts}"></td>  
+=======
                     <td th:text="${cart.orderNumber}"</td>
                 <form action="#" th:action="@{/updateQuantity}" th:object="${orderLineBean}" method="post">
                     <input type="hidden" th:value="${cart.productId}" name="productId"/>
@@ -34,6 +38,7 @@
                     <input type="hidden" th:value="${cart.productId}" name="productId"/>
                     <td><input class="button" type="submit" value="Remove" /></td>
                 </form>
+>>>>>>> ce242da06b97b4668296a32d319cf70ed8d7a136
                 </tr>
                 </th:block>
             </table>
