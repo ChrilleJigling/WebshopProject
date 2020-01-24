@@ -132,8 +132,7 @@ public class WebshopService {
         logger.info("SHOPPINGCART");
         List<OrderLine> orderLineList = new ArrayList();
         for (Orders orders : orderList) {
-            orderLineList = orderLineRepository.findByOrderNumber(orders.getOrderNumber());
-            logger.info(String.valueOf(orderLineList.get(0)));
+            orderLineList.addAll(orderLineRepository.findByOrderNumber(orders.getOrderNumber()));
         }
         return orderLineList;
     }

@@ -23,6 +23,7 @@
                     <td th:text="${cart.orderNumber}"</td>
                 <form action="#" th:action="@{/updateQuantity}" th:object="${orderLineBean}" method="post">
                     <input type="hidden" th:value="${product.id}" name="productId"/>
+                   <td th:text="${cart.orderNumber}"</td>
                     <td th:text="${cart.productId}"</td> 
                     <td th:text="${cart.accountId}"></td>
                     <td><input class="number" type="submit" value="${cart.nrOfProducts}" /></td>
