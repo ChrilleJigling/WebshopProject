@@ -198,8 +198,8 @@ public class WebshopService {
         return totalPrice;
     }
     
-    public void updateOrdered(int orderNumber) {
-        List<Orders> ordersList = ordersRepository.findByOrderNumber(orderNumber);
+    public void updateOrdered() {
+        List<Orders> ordersList = ordersRepository.findByAccountId(account.getId());
         Orders order = ordersList.get(0);
         order.setOrdered("YES");
         ordersRepository.save(order);
