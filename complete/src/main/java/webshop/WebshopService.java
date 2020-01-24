@@ -172,4 +172,16 @@ public String error(){
         }
         return sentOrders;
     }
+        
+    public void deleteOrderLine(int productId) {
+        List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
+        OrderLine newOrderLine = orderLineList.get(0);
+        orderLineRepository.delete(newOrderLine);
+    }
+    
+    public void updateOrderLine(int productId) {
+        List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
+        OrderLine newOrderLine = orderLineList.get(0);
+        orderLineRepository.save(newOrderLine);
+    }
 }
