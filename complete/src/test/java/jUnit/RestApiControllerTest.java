@@ -18,11 +18,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class RestApiControllerTest {
+public class RestApiControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
-
+  public RestApiControllerTest(){}
   @Test
   public void getSentOrders() throws Exception {
 

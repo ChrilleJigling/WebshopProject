@@ -150,7 +150,7 @@ public class WebshopWebController {
     
     @PostMapping("/makeOrder")
     public String makeOrder (@ModelAttribute OrderLineBean orderLine, Model model) {
-        webshopService.updateOrdered(orderLine.getOrderNumber());
+        webshopService.updateOrdered();
         return "redirect:/orderConfirmation";
     }
     
