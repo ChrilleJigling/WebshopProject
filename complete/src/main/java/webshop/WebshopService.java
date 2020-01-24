@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+@Service
 @SessionScope
 public class WebshopService {
 
@@ -122,7 +123,6 @@ public class WebshopService {
     public List getOrders() {
         return ordersRepository.findAll();
     }
-
     public List getShoppingCart() {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
         int listSize = orderList.size();

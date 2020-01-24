@@ -20,9 +20,7 @@
                 </tr>
                 <th:block class="" th:each="cart : ${shopCart}">
                 <tr>           
-                   <td th:text="${cart.orderNumber}"</td>
                     <td th:text="${cart.productId}"</td> 
-                    <td th:text="${cart.accountId}"></td> 
                     <td th:text="${cart.nrOfProducts}"></td>  
                 </tr>
                 </th:block>

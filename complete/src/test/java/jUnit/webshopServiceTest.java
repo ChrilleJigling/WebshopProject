@@ -22,7 +22,7 @@ public class webshopServiceTest {
     
     @Test
     public void loginTest() {
-        boolean isLoggedIn = webshopService.login("chrille", "1234");
+        boolean isLoggedIn = webshopService.login("mellas", "mollas");
         assertTrue(isLoggedIn);
     }
     

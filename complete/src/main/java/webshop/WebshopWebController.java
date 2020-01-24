@@ -71,16 +71,14 @@ public class WebshopWebController {
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.createOrder();
         webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
-        return "redirect:/accountPage";
+        return "/order";
     }
     
     @GetMapping("/shoppingCart")
     public String linkToShoppingCart(Model model) {
-        logger.info("CONTROLLER");
         List shopCart = webshopService.getShoppingCart();
-        logger.info("Controller");
         model.addAttribute("shopCart", shopCart);
-        logger.info("added attr");
+        model.addAttribute("", webshopService.getTotalPrice(shopCart));
         return "/shoppingCart";
     }
 
