@@ -141,13 +141,13 @@ public class WebshopWebController {
     @PostMapping("/delete")
     public String deleteOrderLine(@ModelAttribute OrderLineBean orderLine, Model model) {
         webshopService.deleteOrderLine(orderLine.productId);
-        return "/shoppingCart";
+        return "redirect:/shoppingCart";
     }
     
     @PostMapping("/updateQuantity")
     public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
         webshopService.updateOrderLine(orderLine.productId);
-        return "/shoppingCart";
+        return "redirect:/shoppingCart";
     }
 
     /* @GetMapping("/orderDetails")
