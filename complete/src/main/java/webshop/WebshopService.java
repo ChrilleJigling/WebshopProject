@@ -123,6 +123,7 @@ public class WebshopService {
     public List getOrders() {
         return ordersRepository.findAll();
     }
+
     public List getShoppingCart() {
         List<Orders> orderList = ordersRepository.findByAccountIdAndSent(account.getId(), "NO");
         int listSize = orderList.size();
@@ -137,12 +138,14 @@ public class WebshopService {
     public List getOrdersByAccount() {
         return ordersRepository.findByAccountId(account.getId());
     }
-public String error(){
-    if(isLoggedIn) {
-        return "You need admin privilages for that!";
+
+    public String error() {
+        if (isLoggedIn) {
+            return "You need admin privilages for that!";
+        }
+        return "Make sure you're logged in";
     }
-    return "Make sure you're logged in";
-}
+
     public void markOrderAsSent(int orderNumber) {
         List<Orders> orders = ordersRepository.findByOrderNumber(orderNumber);
         Orders order = orders.get(0);
@@ -160,7 +163,8 @@ public String error(){
         }
         return unsentOrders;
     }
-        public List getSentOrders() {
+
+    public List getSentOrders() {
         List<Orders> allOrders = ordersRepository.findAll();
         List<Orders> sentOrders = new ArrayList<>();
         for (Orders order : allOrders) {
@@ -170,26 +174,28 @@ public String error(){
         }
         return sentOrders;
     }
-        
+
     public void deleteOrderLine(int productId) {
         List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
         OrderLine newOrderLine = orderLineList.get(0);
         orderLineRepository.delete(newOrderLine);
     }
-    
+
     public void updateOrderLine(int productId, int nrOfProducts) {
         List<OrderLine> orderLineList = orderLineRepository.findByProductId(productId);
         OrderLine newOrderLine = orderLineList.get(0);
         newOrderLine.setNrOfProducts(nrOfProducts);
         orderLineRepository.save(newOrderLine);
     }
-    
+
     public double getTotalPrice() {
         List<OrderLine> orderLineList = orderLineRepository.findByAccountId(account.getId());
         double totalPrice = 0;
         for (OrderLine orderLine : orderLineList) {
-            totalPrice += orderLine.getProduct().getPrice();
+            double nrOfProducts = orderLine.getNrOfProducts();
+            totalPrice += orderLine.getProduct().getPrice() * nrOfProducts;
         }
         return totalPrice;
     }
+
 }

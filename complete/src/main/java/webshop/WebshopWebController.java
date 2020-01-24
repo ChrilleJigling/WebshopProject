@@ -71,7 +71,7 @@ public class WebshopWebController {
     public String addToCart(@ModelAttribute OrderLineBean orderLineBean, Model model) {
         webshopService.createOrder();
         webshopService.addToCart(orderLineBean.getProductId(), orderLineBean.getNrOfProducts());
-        return "/order";
+        return "redirect:/accountPage";
     }
     
     @GetMapping("/shoppingCart")
@@ -144,7 +144,7 @@ public class WebshopWebController {
     
     @PostMapping("/updateQuantity")
     public String updateQuantity (@ModelAttribute OrderLineBean orderLine, Model model) {
-        webshopService.updateOrderLine(orderLine.productId, orderLine.nrOfProducts);
+        webshopService.updateOrderLine(orderLine.productId,orderLine.nrOfProducts);
         return "redirect:/shoppingCart";
     }
 

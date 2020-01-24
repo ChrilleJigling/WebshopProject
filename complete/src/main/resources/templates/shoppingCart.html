@@ -10,19 +10,20 @@
     <body>
         <div class="headerText">ArCh Webshop</div>
         <script type="text/javascript" script-name="aclonica" src="http://use.edgefonts.net/aclonica.js"></script>
-        
-            <table id="productsTable">
-                <tr>
-                    <th>Order Number</th>
-                    <th>Product ID</th>
-                    <th>Account ID</th>
-                    <th>Quantity</th>
-                </tr>
-                <th:block class="" th:each="cart : ${shopCart}">
+
+        <table id="productsTable">
+            <tr>
+                <th>Order Number</th>
+                <th>Product ID</th>
+                <th>Account ID</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+            <th:block class="" th:each="cart : ${shopCart}">
                 <tr>           
                 <form action="#" th:action="@{/updateQuantity}" th:object="${orderLineBean}" method="post">
                     <input type="hidden" th:value="${cart.productId}" name="productId"/>
-                   <td th:text="${cart.orderNumber}"</td>
+                    <td th:text="${cart.orderNumber}"</td>
                     <td th:text="${cart.productId}"</td> 
                     <td th:text="${cart.accountId}"></td>
                     <td><input class="number" type="number" th:value="${cart.nrOfProducts}" name="nrOfProducts"/>
@@ -34,8 +35,10 @@
                     <td><input class="button" type="submit" value="Remove" /></td>
                 </form>
                 </tr>
-                </th:block>
-            </table>
-        
+            </th:block>
+
+        </table>
+        <p >Total Price: </p>
+        <p th:text="${totalPrice}" > </p>
     </body>
 </html>
