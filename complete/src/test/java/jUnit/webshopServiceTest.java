@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import webshop.WebshopService;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
 public class webshopServiceTest {
     
     @Autowired
